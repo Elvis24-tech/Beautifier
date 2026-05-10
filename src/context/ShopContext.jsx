@@ -6,32 +6,20 @@ export function ShopProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
-  // ADD TO CART
+  // CART
   const addToCart = (product) => {
-    setCart((prev) => {
-      const exists = prev.find((item) => item.id === product.id);
-      if (exists) return prev;
-
-      return [...prev, product];
-    });
+    setCart((prev) => [...prev, product]);
   };
 
-  // ADD TO WISHLIST
-  const addToWishlist = (product) => {
-    setWishlist((prev) => {
-      const exists = prev.find((item) => item.id === product.id);
-      if (exists) return prev;
-
-      return [...prev, product];
-    });
-  };
-
-  // REMOVE FROM CART
   const removeFromCart = (id) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // REMOVE FROM WISHLIST
+  // WISHLIST
+  const addToWishlist = (product) => {
+    setWishlist((prev) => [...prev, product]);
+  };
+
   const removeFromWishlist = (id) => {
     setWishlist((prev) => prev.filter((item) => item.id !== id));
   };
@@ -42,8 +30,8 @@ export function ShopProvider({ children }) {
         cart,
         wishlist,
         addToCart,
-        addToWishlist,
         removeFromCart,
+        addToWishlist,
         removeFromWishlist,
       }}
     >

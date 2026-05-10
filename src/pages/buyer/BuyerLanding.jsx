@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 function BuyerLanding() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-purple-100 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-pink-50 via-rose-50 to-purple-100 relative overflow-hidden">
 
       {/* Background Glow */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-pink-300/30 blur-[120px] rounded-full"></div>
-      <div className="absolute bottom-[-120px] right-[-100px] w-96 h-96 bg-purple-300/30 blur-[140px] rounded-full"></div>
+      <div className="absolute -bottom-30 -right-25 w-96 h-96 bg-purple-300/30 blur-[140px] rounded-full"></div>
 
       {/* NAVBAR */}
       <nav className="flex justify-between items-center px-5 md:px-16 py-6 relative z-10">
@@ -19,14 +19,14 @@ function BuyerLanding() {
 
           <Link
             to="/buyer/dashboard"
-            className="bg-white/70 backdrop-blur-xl px-4 md:px-6 py-2 md:py-3 rounded-full shadow hover:scale-105 transition text-sm md:text-base"
+            className="bg-white/70 backdrop-blur-xl px-4 md:px-6 py-2 md:py-3 rounded-full shadow hover:scale-105 transition"
           >
             Shop
           </Link>
 
           <Link
             to="/admin"
-            className="bg-gradient-to-r from-pink-400 to-purple-400 text-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow hover:scale-105 transition text-sm md:text-base"
+            className="bg-linear-to-r from-pink-400 to-purple-400 text-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow hover:scale-105 transition"
           >
             Admin
           </Link>
@@ -38,7 +38,6 @@ function BuyerLanding() {
       {/* HERO */}
       <section className="grid lg:grid-cols-2 gap-10 items-center px-5 md:px-16 py-10 md:py-16 relative z-10">
 
-        {/* LEFT */}
         <div>
 
           <p className="text-pink-500 tracking-[4px] uppercase text-xs md:text-sm font-semibold">
@@ -47,7 +46,7 @@ function BuyerLanding() {
 
           <h1 className="text-4xl md:text-6xl font-black text-gray-800 leading-tight mt-3">
             Glow like
-            <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
               {" "}never before
             </span>
           </h1>
@@ -56,12 +55,11 @@ function BuyerLanding() {
             Discover skincare, makeup, and fragrance products designed to enhance your natural beauty.
           </p>
 
-          {/* CTA */}
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
 
             <Link
               to="/buyer/dashboard"
-              className="bg-gradient-to-r from-pink-400 to-purple-400 text-white px-6 py-3 rounded-full shadow-lg text-center hover:scale-105 transition"
+              className="bg-linear-to-r from-pink-400 to-purple-400 text-white px-6 py-3 rounded-full shadow-lg text-center hover:scale-105 transition"
             >
               Start Shopping
             </Link>
@@ -72,29 +70,9 @@ function BuyerLanding() {
 
           </div>
 
-          {/* STATS */}
-          <div className="grid grid-cols-3 gap-4 mt-10 text-center">
-
-            <div>
-              <h2 className="text-xl md:text-3xl font-black text-gray-800">10K+</h2>
-              <p className="text-gray-500 text-xs md:text-sm">Customers</p>
-            </div>
-
-            <div>
-              <h2 className="text-xl md:text-3xl font-black text-gray-800">200+</h2>
-              <p className="text-gray-500 text-xs md:text-sm">Products</p>
-            </div>
-
-            <div>
-              <h2 className="text-xl md:text-3xl font-black text-gray-800">4.8★</h2>
-              <p className="text-gray-500 text-xs md:text-sm">Rating</p>
-            </div>
-
-          </div>
-
         </div>
 
-        {/* RIGHT - PRODUCT SHOWCASE */}
+        {/* PRODUCT PREVIEW */}
         <div className="grid grid-cols-2 gap-4">
 
           {[
@@ -114,14 +92,13 @@ function BuyerLanding() {
               img: "https://images.unsplash.com/photo-1615634260167-c8cdede054de",
               name: "Serum"
             }
-          ].map((item, index) => (
+          ].map((item, i) => (
             <div
-              key={index}
+              key={i}
               className="bg-white/60 backdrop-blur-xl rounded-3xl overflow-hidden shadow-lg hover:scale-105 transition"
             >
               <img
                 src={item.img}
-                alt={item.name}
                 className="h-40 w-full object-cover"
               />
               <p className="text-center py-3 text-gray-700 font-semibold text-sm">
