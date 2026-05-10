@@ -16,15 +16,17 @@ function App() {
 
       <Routes>
 
-        {/* 🌸 DEFAULT: BUYER LANDING PAGE */}
+        {/* 🌸 DEFAULT */}
         <Route path="/" element={<BuyerLanding />} />
 
-        {/* 🛍 BUYER ROUTES */}
+        {/* 🛍 BUYER */}
         <Route path="/buyer" element={<BuyerDashboard />} />
+        <Route path="/buyer/dashboard" element={<BuyerDashboard />} /> {/* ✅ ADD THIS */}
+
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
 
-        {/* 🧑‍💼 ADMIN ROUTES */}
+        {/* 🧑‍💼 ADMIN */}
         <Route path="/admin" element={<AdminLanding />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/products" element={<Products />} />
