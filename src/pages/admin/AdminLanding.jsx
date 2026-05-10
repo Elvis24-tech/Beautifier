@@ -64,7 +64,7 @@ function AdminLanding() {
           <img
             src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1"
             alt="Admin Dashboard"
-            className="rounded-3xl shadow-2xl w-full max-w-[550px] object-cover"
+            className="rounded-3xl shadow-2xl w-full max-w-137.5 object-cover"
           />
 
         </div>

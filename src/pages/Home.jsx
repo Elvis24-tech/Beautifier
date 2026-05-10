@@ -5,13 +5,13 @@ function Home() {
     <div className="min-h-screen overflow-hidden relative bg-[#fff8fb]">
 
       {/* Premium Background Layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-rose-100 via-pink-50 to-purple-100"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-rose-100 via-pink-50 to-purple-100"></div>
 
-      <div className="absolute top-[-120px] left-[-100px] w-[420px] h-[420px] bg-pink-300/40 blur-[140px] rounded-full"></div>
+      <div className="absolute -top-30 -left-25 w-105 h-105 bg-pink-300/40 blur-[140px] rounded-full"></div>
 
-      <div className="absolute top-[20%] right-[-120px] w-[400px] h-[400px] bg-purple-300/30 blur-[140px] rounded-full"></div>
+      <div className="absolute top-[20%] -right-30 w-100 h-100 bg-purple-300/30 blur-[140px] rounded-full"></div>
 
-      <div className="absolute bottom-[-150px] left-[20%] w-[450px] h-[450px] bg-rose-200/40 blur-[150px] rounded-full"></div>
+      <div className="absolute -bottom-37.5 left-[20%] w-112.5 h-112.5 bg-rose-200/40 blur-[150px] rounded-full"></div>
 
       <div className="absolute inset-0 backdrop-blur-[80px]"></div>
 
@@ -48,7 +48,7 @@ function Home() {
             <Link
               to="/admin"
               className="
-                bg-gradient-to-r
+                bg-linear-to-r
                 from-pink-400
                 via-rose-400
                 to-purple-400
@@ -83,7 +83,7 @@ function Home() {
               Glow With
               <br />
 
-              <span className="bg-gradient-to-r from-pink-500 via-rose-500 to-purple-500 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-pink-500 via-rose-500 to-purple-500 bg-clip-text text-transparent">
                 Confidence
               </span>
 
@@ -99,7 +99,7 @@ function Home() {
 
               <button
                 className="
-                  bg-gradient-to-r
+                  bg-linear-to-r
                   from-pink-400
                   via-rose-400
                   to-purple-400
@@ -202,7 +202,7 @@ function Home() {
                 relative
                 z-10
                 w-full
-                max-w-[520px]
+                max-w-130
                 rounded-[40px]
                 object-cover
                 shadow-[0_20px_80px_rgba(236,72,153,0.25)]

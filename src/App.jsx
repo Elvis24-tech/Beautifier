@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-
+import BuyerLanding from "./pages/buyer/BuyerLanding";
 import BuyerDashboard from "./pages/buyer/BuyerDashboard";
 import Cart from "./pages/buyer/Cart";
 import Wishlist from "./pages/buyer/Wishlist";
@@ -17,15 +16,15 @@ function App() {
 
       <Routes>
 
-        {/* Public */}
-        <Route path="/" element={<Home />} />
+        {/* 🌸 DEFAULT: BUYER LANDING PAGE */}
+        <Route path="/" element={<BuyerLanding />} />
 
-        {/* Buyer */}
+        {/* 🛍 BUYER ROUTES */}
         <Route path="/buyer" element={<BuyerDashboard />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
 
-        {/* Admin */}
+        {/* 🧑‍💼 ADMIN ROUTES */}
         <Route path="/admin" element={<AdminLanding />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/products" element={<Products />} />
