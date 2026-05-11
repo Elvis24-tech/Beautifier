@@ -1,5 +1,5 @@
 import { useShop } from "../../context/ShopContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Cart() {
   const {
@@ -10,6 +10,8 @@ function Cart() {
     clearCart,
   } = useShop();
 
+  const navigate = useNavigate();
+
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -19,16 +21,27 @@ function Cart() {
     <div className="min-h-screen bg-linear-to-br from-rose-50 via-pink-50 to-purple-100 px-4 md:px-10 py-10">
 
       {/* HEADER */}
-      <div className="mb-8">
-        <h1 className="text-4xl md:text-5xl font-black text-gray-800">
-          Your Cart
-        </h1>
-        <p className="text-gray-500 mt-2">
-          Review your selected beauty products
-        </p>
-      </div>
+      <div className="mb-8 flex items-center justify-between gap-4">
 
-      {/* EMPTY STATE */}
+        {/* BACK BUTTON */}
+        <button
+          onClick={() => navigate(-1)}
+          className="bg-white/70 backdrop-blur-xl border border-white/40 px-4 md:px-5 py-2 rounded-full shadow hover:scale-105 transition text-sm md:text-base font-medium"
+        >
+          ← Back
+        </button>
+
+        {/* TITLE */}
+        <div className="text-center flex-1">
+          <h1 className="text-3xl md:text-5xl font-black text-gray-800">
+            Your Cart
+          </h1>
+          <p className="text-gray-500 mt-2">
+            Review your selected beauty products
+          </p>
+        </div>
+        <div className="w-16 md:w-24" />
+      </div>
       {cart.length === 0 ? (
         <div className="flex flex-col items-center justify-center text-center mt-20">
           <div className="w-28 h-28 bg-white/60 backdrop-blur-xl rounded-full flex items-center justify-center shadow-lg text-5xl">
@@ -48,8 +61,6 @@ function Cart() {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-          {/* LEFT SIDE - PRODUCTS */}
           <div className="lg:col-span-2 space-y-5">
 
             {cart.map((item) => (
@@ -74,7 +85,6 @@ function Cart() {
                     Ksh {item.price}
                   </p>
 
-                  {/* QUANTITY */}
                   <div className="flex items-center gap-3 mt-3">
 
                     <button
@@ -115,8 +125,6 @@ function Cart() {
             ))}
 
           </div>
-
-          {/* RIGHT SIDE - CHECKOUT */}
           <div className="lg:col-span-1">
 
             <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-6 shadow-xl border border-white/40 lg:sticky lg:top-20">
@@ -167,7 +175,6 @@ function Cart() {
 
         </div>
       )}
-
     </div>
   );
 }
