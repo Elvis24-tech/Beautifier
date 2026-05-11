@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
+import { useShop } from "../../context/ShopContext";
 import ProductCard from "../../components/ProductCard";
 
 function BuyerDashboard() {
+  const { cart, wishlist } = useShop();
+
+  const cartCount = cart.reduce((t, item) => t + item.quantity, 0);
+  const wishlistCount = wishlist.length;
 
   const products = [
     {
@@ -54,20 +59,34 @@ function BuyerDashboard() {
             Beauty<span className="text-pink-500">Shop</span>
           </h1>
 
-          <div className="flex gap-2 md:gap-3">
+          <div className="flex gap-3">
 
+            {/* WISHLIST */}
             <Link
               to="/buyer/wishlist"
-              className="bg-white/70 backdrop-blur-xl px-3 md:px-4 py-2 rounded-full text-sm shadow"
+              className="relative bg-white/70 backdrop-blur-xl px-4 py-2 rounded-full text-sm shadow hover:scale-105 transition"
             >
               ❤️
+
+              {wishlistCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {wishlistCount}
+                </span>
+              )}
             </Link>
 
+            {/* CART (MORE VISIBLE) */}
             <Link
               to="/buyer/cart"
-              className="bg-linear-to-r from-pink-400 to-purple-400 text-white px-3 md:px-4 py-2 rounded-full text-sm shadow"
+              className="relative bg-linear-to-r from-pink-500 to-purple-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:scale-105 transition"
             >
-              🛒
+              🛒 Cart
+
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {cartCount}
+                </span>
+              )}
             </Link>
 
           </div>
@@ -89,7 +108,7 @@ function BuyerDashboard() {
 
       </div>
 
-      {/* PRODUCTS GRID */}
+      {/* PRODUCTS */}
       <div className="px-5 md:px-12 pb-16">
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
