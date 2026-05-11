@@ -7,17 +7,13 @@ function Sidebar() {
     `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition
     ${
       location.pathname === path
-        ? "bg-white text-gray-900 shadow-sm"
+        ? "bg-white/20 text-white"
         : "text-white/80 hover:text-white hover:bg-white/10"
     }`;
 
   return (
     <div className="w-full md:w-64 min-h-screen bg-linear-to-b from-pink-600 via-pink-700 to-purple-800 text-white flex flex-col">
-
-      {/* TOP SECTION */}
       <div className="p-6">
-
-        {/* Brand */}
         <h1 className="text-xl font-bold tracking-tight">
           BeautyShop
         </h1>
@@ -26,12 +22,11 @@ function Sidebar() {
           Admin Console
         </p>
 
-        {/* Divider */}
         <div className="mt-6 border-t border-white/10" />
       </div>
 
-      {/* NAVIGATION */}
-      <div className="px-3 flex flex-col gap-1">
+      {/* NAV */}
+      <div className="px-3 flex flex-col gap-2">
 
         <Link to="/admin/dashboard" className={navItem("/admin/dashboard")}>
           📊 Dashboard
@@ -45,20 +40,13 @@ function Sidebar() {
           📦 Orders
         </Link>
 
-      </div>
-
-      {/* BOTTOM SECTION */}
-      <div className="mt-auto p-6">
-
-        <div className="bg-white/10 rounded-xl p-4">
-          <p className="text-xs text-white/60">
-            BeautyShop Pro Admin
-          </p>
-
-          <p className="text-sm font-medium mt-1">
-            Manage your store efficiently
-          </p>
-        </div>
+        {/* BACK TO HOME (CLEAN VERSION) */}
+        <Link
+          to="/buyer"
+          className="flex items-center gap-3 px-4 py-3 mt-2 rounded-xl text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition"
+        >
+          ⬅ Back to Home
+        </Link>
 
       </div>
 
