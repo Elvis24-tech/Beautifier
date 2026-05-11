@@ -52,13 +52,23 @@ function BuyerDashboard() {
 
       {/* HEADER */}
       <div className="px-5 md:px-12 pt-10">
-
         <div className="flex justify-between items-center mb-6">
+          <div className="flex items-center gap-3">
 
-          <h1 className="text-2xl md:text-3xl font-black text-gray-800">
-            Beauty<span className="text-pink-500">Shop</span>
-          </h1>
+            <Link
+              to="/"
+              className="bg-white/70 backdrop-blur-xl px-4 py-2 rounded-full text-sm shadow hover:scale-105 transition"
+            >
+              ← Home
+            </Link>
 
+            <h1 className="text-2xl md:text-3xl font-black text-gray-800">
+              Beauty<span className="text-pink-500">Shop</span>
+            </h1>
+
+          </div>
+
+          {/* RIGHT ICONS */}
           <div className="flex gap-3">
 
             {/* WISHLIST */}
@@ -75,7 +85,7 @@ function BuyerDashboard() {
               )}
             </Link>
 
-            {/* CART (MORE VISIBLE) */}
+            {/* CART */}
             <Link
               to="/buyer/cart"
               className="relative bg-linear-to-r from-pink-500 to-purple-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:scale-105 transition"
