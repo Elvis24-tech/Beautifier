@@ -4,26 +4,52 @@ import { useShop } from "../context/ShopContext";
 function Navbar() {
   const { cart, wishlist } = useShop();
 
+  const cartCount = cart.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   return (
-    <nav className="flex justify-between items-center px-10 py-5 bg-white shadow-md">
+    <nav className="sticky top-0 z-50 bg-white shadow-md px-6 py-4">
 
-      <h1 className="text-3xl font-bold text-pink-600">
-        BeautyShop
-      </h1>
+      <div className="flex items-center justify-between">
 
-      <div className="flex gap-4">
-
-        <Link to="/buyer" className="bg-pink-500 text-white px-5 py-2 rounded-full">
-          Shop
+        <Link
+          to="/buyer"
+          className="text-3xl font-black text-pink-500"
+        >
+          BeautyShop
         </Link>
 
-        <Link to="/wishlist" className="border px-5 py-2 rounded-full">
-          ❤️ {wishlist.length}
-        </Link>
+        <div className="flex items-center gap-4">
 
-        <Link to="/cart" className="bg-black text-white px-5 py-2 rounded-full">
-          🛒 {cart.length}
-        </Link>
+          <Link
+            to="/wishlist"
+            className="relative bg-white border px-5 py-3 rounded-full"
+          >
+            ❤️
+
+            {wishlist.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-pink-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">
+                {wishlist.length}
+              </span>
+            )}
+          </Link>
+
+          <Link
+            to="/cart"
+            className="relative bg-black text-white px-5 py-3 rounded-full"
+          >
+            🛒
+
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-pink-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">
+                {cartCount}
+              </span>
+            )}
+          </Link>
+
+        </div>
 
       </div>
 

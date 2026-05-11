@@ -12,7 +12,7 @@ function BuyerLanding() {
       <nav className="flex justify-between items-center px-5 md:px-16 py-6 relative z-10">
 
         <h1 className="text-2xl md:text-4xl font-black text-gray-800">
-          Beautify
+          Beautifier
         </h1>
 
         <div className="flex gap-3 md:gap-4">

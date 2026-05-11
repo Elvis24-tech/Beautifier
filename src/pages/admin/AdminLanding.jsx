@@ -13,7 +13,7 @@ function AdminLanding() {
       <nav className="relative z-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 px-6 md:px-10 py-6">
 
         <h1 className="text-2xl md:text-3xl font-black text-gray-800">
-          BeautyShop <span className="text-pink-500">Admin</span>
+          Beautifier <span className="text-pink-500">Admin</span>
         </h1>
 
         <Link
