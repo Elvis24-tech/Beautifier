@@ -1,102 +1,87 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const ShopContext = createContext();
 
 export function ShopProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
 
-  // =========================
-  // ADD TO CART
-  // =========================
+  // LOAD FROM LOCALSTORAGE INITIALLY
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const [wishlist, setWishlist] = useState(() => {
+    const saved = localStorage.getItem("wishlist");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // SAVE CART
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  // SAVE WISHLIST
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
+
+  // ================= CART =================
   const addToCart = (product) => {
     setCart((prev) => {
-      const existingProduct = prev.find(
-        (item) => item.id === product.id
-      );
+      const existing = prev.find((item) => item.id === product.id);
 
-      // PRODUCT EXISTS
-      if (existingProduct) {
+      if (existing) {
         return prev.map((item) =>
           item.id === product.id
-            ? {
-                ...item,
-                quantity: item.quantity + 1,
-              }
+            ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
 
-      // NEW PRODUCT
-      return [
-        ...prev,
-        {
-          ...product,
-          quantity: 1,
-        },
-      ];
+      return [...prev, { ...product, quantity: 1 }];
     });
   };
 
-  // REMOVE FROM CART
   const removeFromCart = (id) => {
-    setCart((prev) =>
-      prev.filter((item) => item.id !== id)
-    );
+    setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // INCREASE
   const increaseQuantity = (id) => {
     setCart((prev) =>
       prev.map((item) =>
         item.id === id
-          ? {
-              ...item,
-              quantity: item.quantity + 1,
-            }
+          ? { ...item, quantity: item.quantity + 1 }
           : item
       )
     );
   };
 
-  // DECREASE
   const decreaseQuantity = (id) => {
     setCart((prev) =>
       prev
         .map((item) =>
           item.id === id
-            ? {
-                ...item,
-                quantity: item.quantity - 1,
-              }
+            ? { ...item, quantity: item.quantity - 1 }
             : item
         )
         .filter((item) => item.quantity > 0)
     );
   };
 
-  // CLEAR CART
   const clearCart = () => {
     setCart([]);
   };
 
-  // =========================
-  // WISHLIST
-  // =========================
+  // ================= WISHLIST =================
   const addToWishlist = (product) => {
-    const exists = wishlist.find(
-      (item) => item.id === product.id
-    );
-
+    const exists = wishlist.find((item) => item.id === product.id);
     if (exists) return;
 
     setWishlist((prev) => [...prev, product]);
   };
 
   const removeFromWishlist = (id) => {
-    setWishlist((prev) =>
-      prev.filter((item) => item.id !== id)
-    );
+    setWishlist((prev) => prev.filter((item) => item.id !== id));
   };
 
   return (
@@ -104,13 +89,11 @@ export function ShopProvider({ children }) {
       value={{
         cart,
         wishlist,
-
         addToCart,
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
         clearCart,
-
         addToWishlist,
         removeFromWishlist,
       }}
