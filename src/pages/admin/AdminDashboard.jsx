@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
-  LineChart,
-  Line,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   Tooltip,
@@ -29,10 +29,7 @@ function AdminDashboard() {
           sales: Math.floor(Math.random() * 100),
         };
 
-        const updated = [...prev, newPoint];
-
-        // keep only last 8 points
-        return updated.slice(-8);
+        return [...prev, newPoint].slice(-8);
       });
     }, 3000);
 
@@ -68,7 +65,7 @@ function AdminDashboard() {
 
         </div>
 
-        {/* LIVE CHART */}
+        {/* BAR CHART */}
         <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-3xl shadow-lg p-6 md:p-8">
 
           <h2 className="text-xl font-bold text-gray-800 mb-6">
@@ -78,21 +75,20 @@ function AdminDashboard() {
           <div className="h-72">
 
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={data}>
+              <BarChart data={data}>
 
                 <XAxis dataKey="time" />
                 <YAxis />
                 <Tooltip />
 
-                <Line
-                  type="monotone"
+                <Bar
                   dataKey="sales"
-                  stroke="#ec4899"
-                  strokeWidth={3}
-                  dot={{ r: 4 }}
+                  fill="#ec4899"
+                  radius={[8, 8, 0, 0]}
                 />
 
-              </LineChart>
+              </BarChart>
+
             </ResponsiveContainer>
 
           </div>
