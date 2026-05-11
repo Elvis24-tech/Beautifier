@@ -55,18 +55,15 @@ function BuyerLanding() {
             Discover skincare, makeup, and fragrance products designed to enhance your natural beauty.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mt-8">
+          {/* ONLY ONE CTA NOW */}
+          <div className="mt-8">
 
             <Link
               to="/buyer/dashboard"
-              className="bg-linear-to-r from-pink-400 to-purple-400 text-white px-6 py-3 rounded-full shadow-lg text-center hover:scale-105 transition"
+              className="inline-block bg-linear-to-r from-pink-400 to-purple-400 text-white px-8 py-3 rounded-full shadow-lg hover:scale-105 transition"
             >
               Start Shopping
             </Link>
-
-            <button className="bg-white/60 backdrop-blur-xl px-6 py-3 rounded-full shadow hover:bg-white transition">
-              Explore Products
-            </button>
 
           </div>
 
@@ -100,6 +97,7 @@ function BuyerLanding() {
               <img
                 src={item.img}
                 className="h-40 w-full object-cover"
+                alt={item.name}
               />
               <p className="text-center py-3 text-gray-700 font-semibold text-sm">
                 {item.name}

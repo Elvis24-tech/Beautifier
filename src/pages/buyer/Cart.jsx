@@ -74,7 +74,6 @@ function Cart() {
                 className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition"
               >
 
-                {/* IMAGE */}
                 <img
                   src={item.image}
                   alt={item.name}
@@ -150,9 +149,13 @@ function Cart() {
               </h2>
             </div>
 
-            <button className="mt-6 md:mt-0 bg-linear-to-r from-pink-500 to-purple-500 text-white px-10 py-4 rounded-full font-bold shadow-lg hover:scale-105 transition">
+            {/* FIXED CHECKOUT BUTTON */}
+            <Link
+              to="/buyer/checkout"
+              className="mt-6 md:mt-0 bg-linear-to-r from-pink-500 to-purple-500 text-white px-10 py-4 rounded-full font-bold shadow-lg hover:scale-105 transition"
+            >
               Checkout
-            </button>
+            </Link>
 
           </div>
         </>
