@@ -1,146 +1,188 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar";
 
-function Products() {
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: "Glow Serum",
-      price: "1200",
-      stock: 10,
-    },
-    {
-      id: 2,
-      name: "Hydrating Cream",
-      price: "1500",
-      stock: 5,
-    },
-  ]);
+import {
+  getProducts,
+  createProduct,
+  deleteProduct,
+} from "../../services/product";
 
+function Products() {
+  const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-linear-to-br from-rose-50 via-pink-50 to-purple-100">
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    stock: "",
+    image: "",
+  });
 
-      {/* Sidebar */}
+  // GET PRODUCTS
+  const fetchProducts = async () => {
+    try {
+      const data = await getProducts();
+      setProducts(data);
+    } catch (err) {
+      console.log("GET ERROR:", err.response?.data || err);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  // CREATE PRODUCT
+  const handleCreate = async () => {
+    try {
+      const payload = {
+        name: form.name,
+        price: Number(form.price),
+        stock: Number(form.stock),
+        image: form.image,
+      };
+
+      await createProduct(payload);
+
+      setForm({
+        name: "",
+        price: "",
+        stock: "",
+        image: "",
+      });
+
+      setShowModal(false);
+      fetchProducts();
+    } catch (err) {
+      console.log("CREATE ERROR:", err.response?.data || err);
+    }
+  };
+
+  // DELETE PRODUCT
+  const handleDelete = async (id) => {
+    try {
+      await deleteProduct(id);
+      fetchProducts();
+    } catch (err) {
+      console.log("DELETE ERROR:", err.response?.data || err);
+    }
+  };
+
+  return (
+    <div className="flex min-h-screen bg-gray-50">
+
+      {/* SIDEBAR */}
       <Sidebar />
 
-      {/* Main */}
-      <div className="flex-1 p-6 md:p-10">
+      {/* MAIN */}
+      <div className="flex-1 p-6">
 
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
-
-          <div>
-            <h1 className="text-3xl md:text-4xl font-black text-gray-800">
-              Products
-            </h1>
-
-            <p className="text-gray-500 mt-1">
-              Manage your beauty store inventory
-            </p>
-          </div>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-bold">Products</h1>
 
           <button
             onClick={() => setShowModal(true)}
-            className="bg-linear-to-r from-pink-400 to-purple-400 text-white px-5 py-3 rounded-full shadow-lg hover:scale-105 transition w-full sm:w-auto"
+            className="bg-pink-500 text-white px-4 py-2 rounded-xl"
           >
             + Add Product
           </button>
+        </div>
+
+        {/* PRODUCTS GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white shadow rounded-xl overflow-hidden"
+            >
+
+              <img
+                src={product.image}
+                className="h-40 w-full object-cover"
+                alt={product.name}
+              />
+
+              <div className="p-4">
+
+                <h2 className="font-bold">{product.name}</h2>
+                <p>KES {product.price}</p>
+                <p>Stock: {product.stock}</p>
+
+                <button
+                  onClick={() => handleDelete(product.id)}
+                  className="mt-3 w-full bg-red-500 text-white py-2 rounded-xl"
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </div>
+          ))}
 
         </div>
 
-        {/* PRODUCT GRID */}
-        {products.length === 0 ? (
-          <div className="bg-white/60 backdrop-blur-xl border border-white/40 rounded-3xl shadow-lg p-10 text-center">
-
-            <div className="text-5xl mb-4">🛍️</div>
-
-            <h2 className="text-xl font-bold text-gray-700">
-              No products yet
-            </h2>
-
-            <p className="text-gray-500 mt-2">
-              Start by adding your first beauty product.
-            </p>
-
-          </div>
-        ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-3xl shadow-lg p-6 hover:-translate-y-2 transition"
-              >
-
-                <h2 className="text-xl font-bold text-gray-800">
-                  {product.name}
-                </h2>
-
-                <p className="text-gray-600 mt-2">
-                  Price: Ksh {product.price}
-                </p>
-
-                <p className="text-gray-500 mt-1">
-                  Stock: {product.stock}
-                </p>
-
-                {/* Actions */}
-                <div className="flex gap-3 mt-5">
-
-                  <button className="flex-1 bg-pink-500 text-white py-2 rounded-xl hover:bg-pink-600 transition">
-                    Edit
-                  </button>
-
-                  <button className="flex-1 bg-red-400 text-white py-2 rounded-xl hover:bg-red-500 transition">
-                    Delete
-                  </button>
-
-                </div>
-
-              </div>
-            ))}
-
-          </div>
-        )}
-
-        {/* MODAL (UI ONLY) */}
+        {/* MODAL */}
         {showModal && (
-          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
 
-            <div className="bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl">
+            <div className="bg-white p-6 rounded-xl w-96">
 
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              <h2 className="text-xl font-bold mb-4">
                 Add Product
               </h2>
 
               <input
-                placeholder="Product name"
-                className="w-full border rounded-xl p-3 mb-3"
+                placeholder="Name"
+                className="w-full border p-2 mb-2"
+                value={form.name}
+                onChange={(e) =>
+                  setForm({ ...form, name: e.target.value })
+                }
               />
 
               <input
                 placeholder="Price"
-                className="w-full border rounded-xl p-3 mb-3"
+                className="w-full border p-2 mb-2"
+                value={form.price}
+                onChange={(e) =>
+                  setForm({ ...form, price: e.target.value })
+                }
               />
 
               <input
                 placeholder="Stock"
-                className="w-full border rounded-xl p-3 mb-5"
+                className="w-full border p-2 mb-2"
+                value={form.stock}
+                onChange={(e) =>
+                  setForm({ ...form, stock: e.target.value })
+                }
               />
 
-              <div className="flex gap-3">
+              <input
+                placeholder="Image URL"
+                className="w-full border p-2 mb-4"
+                value={form.image}
+                onChange={(e) =>
+                  setForm({ ...form, image: e.target.value })
+                }
+              />
+
+              <div className="flex gap-2">
+
+                <button
+                  onClick={handleCreate}
+                  className="flex-1 bg-green-500 text-white py-2 rounded-xl"
+                >
+                  Save
+                </button>
 
                 <button
                   onClick={() => setShowModal(false)}
-                  className="flex-1 bg-gray-200 py-3 rounded-xl"
+                  className="flex-1 bg-gray-400 text-white py-2 rounded-xl"
                 >
                   Cancel
-                </button>
-
-                <button className="flex-1 bg-linear-to-r from-pink-400 to-purple-400 text-white py-3 rounded-xl">
-                  Save
                 </button>
 
               </div>
