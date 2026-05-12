@@ -17,8 +17,6 @@ function Products() {
     stock: "",
     image: "",
   });
-
-  // GET PRODUCTS
   const fetchProducts = async () => {
     try {
       const data = await getProducts();
@@ -31,8 +29,6 @@ function Products() {
   useEffect(() => {
     fetchProducts();
   }, []);
-
-  // CREATE PRODUCT
   const handleCreate = async () => {
     try {
       const payload = {
@@ -43,7 +39,6 @@ function Products() {
       };
 
       await createProduct(payload);
-
       setForm({
         name: "",
         price: "",
@@ -57,8 +52,6 @@ function Products() {
       console.log("CREATE ERROR:", err.response?.data || err);
     }
   };
-
-  // DELETE PRODUCT
   const handleDelete = async (id) => {
     try {
       await deleteProduct(id);
@@ -70,11 +63,7 @@ function Products() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-
-      {/* SIDEBAR */}
       <Sidebar />
-
-      {/* MAIN */}
       <div className="flex-1 p-6">
 
         <div className="flex justify-between items-center mb-6">
@@ -87,8 +76,6 @@ function Products() {
             + Add Product
           </button>
         </div>
-
-        {/* PRODUCTS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 
           {products.map((product) => (
@@ -96,13 +83,11 @@ function Products() {
               key={product.id}
               className="bg-white shadow rounded-xl overflow-hidden"
             >
-
               <img
                 src={product.image}
                 className="h-40 w-full object-cover"
                 alt={product.name}
               />
-
               <div className="p-4">
 
                 <h2 className="font-bold">{product.name}</h2>
@@ -122,8 +107,6 @@ function Products() {
           ))}
 
         </div>
-
-        {/* MODAL */}
         {showModal && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
 

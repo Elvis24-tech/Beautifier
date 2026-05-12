@@ -3,12 +3,8 @@ import { Link } from "react-router-dom";
 function BuyerLanding() {
   return (
     <div className="min-h-screen bg-linear-to-br from-pink-50 via-rose-50 to-purple-100 relative overflow-hidden">
-
-      {/* Background Glow */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-pink-300/30 blur-[120px] rounded-full"></div>
       <div className="absolute -bottom-30 -right-25 w-96 h-96 bg-purple-300/30 blur-[140px] rounded-full"></div>
-
-      {/* NAVBAR */}
       <nav className="flex justify-between items-center px-5 md:px-16 py-6 relative z-10">
 
         <h1 className="text-2xl md:text-4xl font-black text-gray-800">
@@ -54,8 +50,6 @@ function BuyerLanding() {
           <p className="text-gray-600 mt-5 text-sm md:text-lg max-w-xl">
             Discover skincare, makeup, and fragrance products designed to enhance your natural beauty.
           </p>
-
-          {/* ONLY ONE CTA NOW */}
           <div className="mt-8">
 
             <Link
@@ -64,12 +58,8 @@ function BuyerLanding() {
             >
               Start Shopping
             </Link>
-
           </div>
-
         </div>
-
-        {/* PRODUCT PREVIEW */}
         <div className="grid grid-cols-2 gap-4">
 
           {[
