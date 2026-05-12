@@ -1,58 +1,33 @@
 import { Link } from "react-router-dom";
 import { useShop } from "../../context/ShopContext";
 import ProductCard from "../../components/ProductCard";
+import { useEffect, useState } from "react";
 
 function BuyerDashboard() {
   const { cart, wishlist } = useShop();
 
+  const [products, setProducts] = useState([]);
+
   const cartCount = cart.reduce((t, item) => t + item.quantity, 0);
   const wishlistCount = wishlist.length;
 
-  const products = [
-    {
-      id: 1,
-      name: "Vitamin C Glow Serum",
-      price: 1200,
-      image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd"
-    },
-    {
-      id: 2,
-      name: "Shea Butter Body Lotion",
-      price: 900,
-      image: "https://images.unsplash.com/photo-1612810436541-336d36d6a2f4"
-    },
-    {
-      id: 3,
-      name: "Rose Face Toner",
-      price: 750,
-      image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be"
-    },
-    {
-      id: 4,
-      name: "Luxury Lip Gloss",
-      price: 650,
-      image: "https://images.unsplash.com/photo-1616683693504-3ea7e9adf3e3"
-    },
-    {
-      id: 5,
-      name: "Hair Growth Oil",
-      price: 1100,
-      image: "https://images.unsplash.com/photo-1615634260167-c8cdede054de"
-    },
-    {
-      id: 6,
-      name: "Perfume Essence",
-      price: 2500,
-      image: "https://images.unsplash.com/photo-1594035910387-fea47794261f"
-    }
-  ];
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/products/")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="min-h-screen bg-linear-to-br from-rose-50 via-pink-50 to-purple-100">
 
       {/* HEADER */}
       <div className="px-5 md:px-12 pt-10">
+
         <div className="flex justify-between items-center mb-6">
+
           <div className="flex items-center gap-3">
 
             <Link
@@ -68,7 +43,6 @@ function BuyerDashboard() {
 
           </div>
 
-          {/* RIGHT ICONS */}
           <div className="flex gap-3">
 
             {/* WISHLIST */}
@@ -97,13 +71,14 @@ function BuyerDashboard() {
                   {cartCount}
                 </span>
               )}
+
             </Link>
 
           </div>
 
         </div>
 
-        {/* HERO TEXT */}
+        {/* HERO */}
         <div className="mb-8">
 
           <h2 className="text-3xl md:text-5xl font-black text-gray-800 leading-tight">
@@ -121,13 +96,27 @@ function BuyerDashboard() {
       {/* PRODUCTS */}
       <div className="px-5 md:px-12 pb-16">
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+        {products.length === 0 ? (
+          <div className="text-center text-gray-500 mt-20">
+            No products available
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
 
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={{
+                  ...product,
+                  image: product.image.startsWith("http")
+                    ? product.image
+                    : `http://127.0.0.1:8000${product.image}`,
+                }}
+              />
+            ))}
 
-        </div>
+          </div>
+        )}
 
       </div>
 

@@ -12,28 +12,53 @@ import Sidebar from "../../components/Sidebar";
 import DashboardCard from "../../components/DashboardCard";
 
 function AdminDashboard() {
-  const [data, setData] = useState([
-    { time: "10s", sales: 20 },
-    { time: "20s", sales: 40 },
-    { time: "30s", sales: 25 },
-    { time: "40s", sales: 60 },
-    { time: "50s", sales: 45 },
-  ]);
+  const [stats, setStats] = useState({
+    orders: 0,
+    products: 0,
+    sales: 0,
+  });
 
-  // Fake real-time updates
+  const [chartData, setChartData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // 🔥 Fetch real backend data
   useEffect(() => {
-    const interval = setInterval(() => {
-      setData((prev) => {
-        const newPoint = {
-          time: `${(prev.length + 1) * 10}s`,
-          sales: Math.floor(Math.random() * 100),
-        };
+    async function fetchDashboardData() {
+      try {
+        const [productsRes, ordersRes] = await Promise.all([
+          fetch("http://127.0.0.1:8000/api/products/"),
+          fetch("http://127.0.0.1:8000/api/orders/"),
+        ]);
 
-        return [...prev, newPoint].slice(-8);
-      });
-    }, 3000);
+        const products = await productsRes.json();
+        const orders = await ordersRes.json();
 
-    return () => clearInterval(interval);
+        // 💰 Calculate total sales (adjust field if needed)
+        const totalSales = orders.reduce((sum, order) => {
+          return sum + Number(order.total || 0);
+        }, 0);
+
+        setStats({
+          products: products.length,
+          orders: orders.length,
+          sales: totalSales,
+        });
+
+        // 📊 Build simple chart data from orders (last 7 entries)
+        const formattedChart = orders.slice(-7).map((order, index) => ({
+          time: `Order ${index + 1}`,
+          sales: Number(order.total || 0),
+        }));
+
+        setChartData(formattedChart);
+        setLoading(false);
+      } catch (error) {
+        console.error("Dashboard fetch error:", error);
+        setLoading(false);
+      }
+    }
+
+    fetchDashboardData();
   }, []);
 
   return (
@@ -56,47 +81,61 @@ function AdminDashboard() {
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+        {/* Loading */}
+        {loading ? (
+          <div className="text-gray-600 text-lg">Loading dashboard...</div>
+        ) : (
+          <>
+            {/* Cards */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
 
-          <DashboardCard title="Total Sales" value="Ksh 120,000" />
-          <DashboardCard title="Orders" value="320" />
-          <DashboardCard title="Products" value="85" />
+              <DashboardCard
+                title="Total Sales"
+                value={`Ksh ${stats.sales.toLocaleString()}`}
+              />
 
-        </div>
+              <DashboardCard
+                title="Orders"
+                value={stats.orders}
+              />
 
-        {/* BAR CHART */}
-        <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-3xl shadow-lg p-6 md:p-8">
+              <DashboardCard
+                title="Products"
+                value={stats.products}
+              />
 
-          <h2 className="text-xl font-bold text-gray-800 mb-6">
-            Live Sales Activity
-          </h2>
+            </div>
 
-          <div className="h-72">
+            {/* BAR CHART */}
+            <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-3xl shadow-lg p-6 md:p-8">
 
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data}>
+              <h2 className="text-xl font-bold text-gray-800 mb-6">
+                Sales Activity (Real Orders)
+              </h2>
 
-                <XAxis dataKey="time" />
-                <YAxis />
-                <Tooltip />
+              <div className="h-72">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData}>
 
-                <Bar
-                  dataKey="sales"
-                  fill="#ec4899"
-                  radius={[8, 8, 0, 0]}
-                />
+                    <XAxis dataKey="time" />
+                    <YAxis />
+                    <Tooltip />
 
-              </BarChart>
+                    <Bar
+                      dataKey="sales"
+                      fill="#ec4899"
+                      radius={[8, 8, 0, 0]}
+                    />
 
-            </ResponsiveContainer>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
 
-          </div>
-
-        </div>
+            </div>
+          </>
+        )}
 
       </div>
-
     </div>
   );
 }
