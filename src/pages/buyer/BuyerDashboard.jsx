@@ -22,12 +22,8 @@ function BuyerDashboard() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-rose-50 via-pink-50 to-purple-100">
-
-      {/* HEADER */}
       <div className="px-5 md:px-12 pt-10">
-
         <div className="flex justify-between items-center mb-6">
-
           <div className="flex items-center gap-3">
 
             <Link
@@ -44,8 +40,6 @@ function BuyerDashboard() {
           </div>
 
           <div className="flex gap-3">
-
-            {/* WISHLIST */}
             <Link
               to="/buyer/wishlist"
               className="relative bg-white/70 backdrop-blur-xl px-4 py-2 rounded-full text-sm shadow hover:scale-105 transition"
@@ -58,8 +52,6 @@ function BuyerDashboard() {
                 </span>
               )}
             </Link>
-
-            {/* CART */}
             <Link
               to="/buyer/cart"
               className="relative bg-linear-to-r from-pink-500 to-purple-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:scale-105 transition"
@@ -77,10 +69,7 @@ function BuyerDashboard() {
           </div>
 
         </div>
-
-        {/* HERO */}
         <div className="mb-8">
-
           <h2 className="text-3xl md:text-5xl font-black text-gray-800 leading-tight">
             Glow with confidence
           </h2>
@@ -92,17 +81,13 @@ function BuyerDashboard() {
         </div>
 
       </div>
-
-      {/* PRODUCTS */}
       <div className="px-5 md:px-12 pb-16">
-
         {products.length === 0 ? (
           <div className="text-center text-gray-500 mt-20">
             No products available
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-
             {products.map((product) => (
               <ProductCard
                 key={product.id}

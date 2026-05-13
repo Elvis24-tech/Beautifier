@@ -10,9 +10,7 @@ function BuyerLanding() {
         <h1 className="text-2xl md:text-4xl font-black text-gray-800">
           Beautifier
         </h1>
-
         <div className="flex gap-3 md:gap-4">
-
           <Link
             to="/buyer/dashboard"
             className="bg-white/70 backdrop-blur-xl px-4 md:px-6 py-2 md:py-3 rounded-full shadow hover:scale-105 transition"
@@ -28,10 +26,7 @@ function BuyerLanding() {
           </Link>
 
         </div>
-
       </nav>
-
-      {/* HERO */}
       <section className="grid lg:grid-cols-2 gap-10 items-center px-5 md:px-16 py-10 md:py-16 relative z-10">
 
         <div>
@@ -64,19 +59,19 @@ function BuyerLanding() {
 
           {[
             {
-              img: "https://images.unsplash.com/photo-1612810436541-336d36d6a2f4",
+              img: "https://images-cdn.ubuy.co.in/66627d4c7792361739098c99-turmeric-face-cream-vitamin-c-glow.jpg",
               name: "Face Cream"
             },
             {
-              img: "https://images.unsplash.com/photo-1616683693504-3ea7e9adf3e3",
+              img: "https://www.byrdie.com/thmb/oTPhNjadECyfMujiDnYakyDXe5o=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/byr-best-lip-glosses-tout-7e6142d81c274fb69cb55d4b398201a0.jpg",
               name: "Lip Gloss"
             },
             {
-              img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be",
+              img: "https://res.cloudinary.com/dioovnmjd/image/upload/v1719560079/products/top-10-best-perfumes-for-men-kenya.webp",
               name: "Perfume"
             },
             {
-              img: "https://images.unsplash.com/photo-1615634260167-c8cdede054de",
+              img: "https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/pby/pby00764/y/5.jpg",
               name: "Serum"
             }
           ].map((item, i) => (
