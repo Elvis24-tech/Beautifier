@@ -58,72 +58,95 @@ function Products() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-linear-to-br from-amber-50 via-yellow-50 to-stone-100">
 
       <Sidebar />
+
       <div className="flex-1 p-4 sm:p-6 md:p-10">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-          <h1 className="text-2xl sm:text-3xl font-black text-gray-900">
-            Products
-          </h1>
+
+        {/* HEADER */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
+
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-black text-black uppercase">
+              Products
+            </h1>
+            <p className="text-black/60 text-sm mt-1">
+              Manage your beauty catalog
+            </p>
+          </div>
 
           <button
             onClick={() => setShowModal(true)}
-            className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-xl w-full sm:w-auto"
+            className="bg-black text-amber-400 px-5 py-3 rounded-full font-bold shadow-xl hover:scale-105 transition"
           >
             + Add Product
           </button>
+
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        {/* PRODUCTS GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white shadow-sm hover:shadow-md transition rounded-2xl overflow-hidden"
+              className="bg-white/80 backdrop-blur-xl border border-black/10 rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition overflow-hidden"
             >
 
               <img
                 src={product.image}
-                className="h-44 w-full object-cover"
+                className="h-48 w-full object-cover"
                 alt={product.name}
               />
 
-              <div className="p-4 space-y-1">
+              <div className="p-5 space-y-2">
 
-                <h2 className="font-bold text-gray-900">
+                <h2 className="font-black text-black text-lg truncate">
                   {product.name}
                 </h2>
 
-                <p className="text-gray-600">
+                <p className="text-amber-600 font-black text-lg">
                   KES {Number(product.price).toLocaleString()}
                 </p>
 
-                <p className="text-sm text-gray-400">
-                  Stock: {product.stock}
+                <p className="text-black/60 text-sm">
+                  Stock:{" "}
+                  <span className="font-bold text-black">
+                    {product.stock}
+                  </span>
                 </p>
 
                 <button
                   onClick={() => handleDelete(product.id)}
-                  className="mt-3 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-xl text-sm"
+                  className="mt-3 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-2xl font-bold transition"
                 >
-                  Delete
+                  Delete Product
                 </button>
 
               </div>
+
             </div>
           ))}
 
         </div>
       </div>
+
+      {/* MODAL */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-md rounded-2xl p-5 sm:p-6">
-            <h2 className="text-xl font-bold mb-4">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+
+          <div className="bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl border border-black/10">
+
+            <h2 className="text-2xl font-black text-black mb-5">
               Add Product
             </h2>
+
             <div className="space-y-3">
+
               <input
-                placeholder="Name"
-                className="w-full border p-3 rounded-xl"
+                placeholder="Product Name"
+                className="w-full border border-black/10 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300"
                 value={form.name}
                 onChange={(e) =>
                   setForm({ ...form, name: e.target.value })
@@ -132,7 +155,7 @@ function Products() {
 
               <input
                 placeholder="Price"
-                className="w-full border p-3 rounded-xl"
+                className="w-full border border-black/10 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300"
                 value={form.price}
                 onChange={(e) =>
                   setForm({ ...form, price: e.target.value })
@@ -141,7 +164,7 @@ function Products() {
 
               <input
                 placeholder="Stock"
-                className="w-full border p-3 rounded-xl"
+                className="w-full border border-black/10 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300"
                 value={form.stock}
                 onChange={(e) =>
                   setForm({ ...form, stock: e.target.value })
@@ -150,7 +173,7 @@ function Products() {
 
               <input
                 placeholder="Image URL"
-                className="w-full border p-3 rounded-xl"
+                className="w-full border border-black/10 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300"
                 value={form.image}
                 onChange={(e) =>
                   setForm({ ...form, image: e.target.value })
@@ -158,17 +181,19 @@ function Products() {
               />
 
             </div>
-            <div className="flex flex-col sm:flex-row gap-2 mt-5">
+
+            <div className="flex gap-3 mt-6">
+
               <button
                 onClick={handleCreate}
-                className="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-xl"
+                className="flex-1 bg-black text-amber-400 py-3 rounded-2xl font-black hover:scale-105 transition"
               >
-                Save
+                Save Product
               </button>
 
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 bg-gray-400 hover:bg-gray-500 text-white py-2 rounded-xl"
+                className="flex-1 bg-gray-200 text-black py-3 rounded-2xl font-bold hover:bg-gray-300 transition"
               >
                 Cancel
               </button>
@@ -183,4 +208,5 @@ function Products() {
     </div>
   );
 }
+
 export default Products;

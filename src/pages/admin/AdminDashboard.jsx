@@ -46,12 +46,7 @@ function AdminDashboard() {
         const totalSales = safeOrders.reduce((sum, order) => {
           return (
             sum +
-            Number(
-              order.total_price ||
-                order.total ||
-                order.amount ||
-                0
-            )
+            Number(order.total_price || order.total || order.amount || 0)
           );
         }, 0);
 
@@ -61,19 +56,12 @@ function AdminDashboard() {
           sales: totalSales,
         });
 
-        const formattedChartData = safeOrders.map(
-          (order, index) => ({
+        setChartData(
+          safeOrders.map((order, index) => ({
             order: `#${order.id || index + 1}`,
-            sales: Number(
-              order.total_price ||
-                order.total ||
-                order.amount ||
-                0
-            ),
-          })
+            sales: Number(order.total_price || order.total || order.amount || 0),
+          }))
         );
-
-        setChartData(formattedChartData);
       } catch (error) {
         console.log("Dashboard Error:", error);
       } finally {
@@ -85,32 +73,34 @@ function AdminDashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-rose-50 via-pink-50 to-purple-100">
-      {/* MOBILE LAYOUT */}
+    <div className="min-h-screen bg-linear-to-br from-amber-50 via-yellow-50 to-stone-100">
       <div className="flex flex-col lg:flex-row">
+
         <Sidebar />
 
         <div className="flex-1 w-full p-4 sm:p-6 md:p-8">
+
           {/* HEADER */}
-          <div className="mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-800 leading-tight">
+          <div className="mb-8">
+            <h1 className="text-2xl sm:text-4xl font-black text-black uppercase tracking-tight">
               Dashboard Overview
             </h1>
 
-            <p className="text-gray-500 mt-2 text-sm sm:text-base">
-              Live store performance tracking
+            <p className="text-black/60 mt-2">
+              Luxury beauty store performance analytics
             </p>
           </div>
 
           {/* LOADING */}
           {loading ? (
-            <div className="bg-white rounded-2xl p-6 shadow-sm text-gray-600">
+            <div className="bg-white/80 backdrop-blur-xl border border-black/10 rounded-2xl p-6 text-black/60">
               Loading dashboard...
             </div>
           ) : (
             <>
               {/* STATS */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mb-8">
+
                 <DashboardCard
                   title="Total Sales"
                   value={`Ksh ${stats.sales.toLocaleString()}`}
@@ -125,71 +115,65 @@ function AdminDashboard() {
                   title="Products"
                   value={stats.products}
                 />
+
               </div>
 
-              {/* CHART CARD */}
-              <div className="bg-white rounded-3xl p-4 sm:p-6 shadow-sm">
-                {/* TOP */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-6">
-                  <h2 className="text-lg sm:text-xl font-bold text-gray-800">
+              {/* CHART */}
+              <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-5 sm:p-6 shadow-xl border border-black/10">
+
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+
+                  <h2 className="text-lg sm:text-xl font-black text-black uppercase">
                     Sales Activity
                   </h2>
 
-                  <span className="text-sm text-gray-500">
+                  <span className="text-black/60 text-sm">
                     Total Orders: {stats.orders}
                   </span>
+
                 </div>
 
-                {/* MOBILE FRIENDLY SCROLL */}
                 <div className="overflow-x-auto">
-                  <div
-                    className="min-w-full"
-                    style={{
-                      width:
-                        chartData.length < 6
-                          ? "100%"
-                          : `${chartData.length * 65}px`,
-                      height: "300px",
-                    }}
-                  >
-                    <ResponsiveContainer
-                      width="100%"
-                      height="100%"
-                    >
+
+                  <div style={{ width: "100%", height: "320px" }}>
+
+                    <ResponsiveContainer width="100%" height="100%">
+
                       <BarChart
                         data={chartData}
-                        margin={{
-                          top: 10,
-                          right: 10,
-                          left: -20,
-                          bottom: 0,
-                        }}
+                        margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
                       >
-                        <CartesianGrid strokeDasharray="3 3" />
 
-                        <XAxis
-                          dataKey="order"
-                          tick={{ fontSize: 11 }}
-                        />
+                        <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
 
-                        <YAxis tick={{ fontSize: 11 }} />
+                        <XAxis dataKey="order" tick={{ fontSize: 12 }} />
+                        <YAxis tick={{ fontSize: 12 }} />
 
                         <Tooltip />
 
+                        {/* AMBER LUXURY BAR */}
                         <Bar
                           dataKey="sales"
-                          fill="#ec4899"
-                          radius={[5, 5, 0, 0]}
-                          barSize={20}
+                          fill="#d97706"
+                          radius={[6, 6, 0, 0]}
+                          barSize={22}
                         />
+
                       </BarChart>
+
                     </ResponsiveContainer>
+
                   </div>
+
                 </div>
+
               </div>
+
             </>
           )}
+
         </div>
+
       </div>
     </div>
   );
