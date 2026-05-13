@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+
+  const { logout } = useContext(AuthContext);
 
   const navItem = (path) =>
     `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200
@@ -13,8 +17,15 @@ function Sidebar() {
         : "text-amber-900/70 hover:text-amber-900 hover:bg-amber-50"
     }`;
 
+  const handleLogout = () => {
+    logout();                 // clear token + user
+    setOpen(false);          // close sidebar
+    navigate("/login");      // redirect to login
+  };
+
   return (
     <>
+      {/* MOBILE TOP BAR */}
       <div className="lg:hidden sticky top-0 z-50 bg-amber-50 px-4 py-4 flex items-center justify-between shadow-sm border-b border-amber-100">
         <div>
           <h1 className="text-amber-900 font-black text-lg uppercase tracking-wide">
@@ -30,12 +41,15 @@ function Sidebar() {
           {open ? "✕" : "☰"}
         </button>
       </div>
+
       {open && (
         <div
           className="lg:hidden fixed inset-0 bg-black/30 z-40"
           onClick={() => setOpen(false)}
         />
       )}
+
+      {/* SIDEBAR */}
       <div
         className={`
           fixed lg:static top-0 left-0 z-50
@@ -49,6 +63,7 @@ function Sidebar() {
           lg:translate-x-0
         `}
       >
+        {/* HEADER */}
         <div className="p-6">
           <div className="flex items-center justify-between lg:block">
             <div>
@@ -66,13 +81,13 @@ function Sidebar() {
             >
               ✕
             </button>
-
           </div>
 
           <div className="mt-6 border-t border-amber-100" />
         </div>
-        <div className="px-3 flex flex-col gap-2 flex-1">
 
+        {/* NAV */}
+        <div className="px-3 flex flex-col gap-2 flex-1">
           <Link
             to="/admin/dashboard"
             className={navItem("/admin/dashboard")}
@@ -99,7 +114,8 @@ function Sidebar() {
 
           <div className="mt-6 border-t border-amber-100" />
 
-          <div className="mt-auto pb-6">
+          {/* FOOTER */}
+          <div className="mt-auto pb-6 space-y-2">
 
             <Link
               to="/buyer"
@@ -109,8 +125,15 @@ function Sidebar() {
               ⬅ Back to Store
             </Link>
 
-          </div>
+            {/* LOGOUT BUTTON */}
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-red-700 hover:text-red-800 hover:bg-red-50 transition"
+            >
+              🚪 Logout
+            </button>
 
+          </div>
         </div>
       </div>
     </>
