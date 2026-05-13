@@ -58,7 +58,7 @@ function Products() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-linear-to-br from-amber-50 via-yellow-50 to-stone-100">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-amber-200">
 
       <Sidebar />
 
@@ -71,14 +71,14 @@ function Products() {
             <h1 className="text-3xl sm:text-4xl font-black text-black uppercase">
               Products
             </h1>
-            <p className="text-black/60 text-sm mt-1">
+            <p className="text-black mt-1 text-sm">
               Manage your beauty catalog
             </p>
           </div>
 
           <button
             onClick={() => setShowModal(true)}
-            className="bg-black text-amber-400 px-5 py-3 rounded-full font-bold shadow-xl hover:scale-105 transition"
+            className="bg-black text-amber-200 px-5 py-3 rounded-full font-bold shadow-xl hover:scale-105 transition"
           >
             + Add Product
           </button>
@@ -91,7 +91,7 @@ function Products() {
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white/80 backdrop-blur-xl border border-black/10 rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition overflow-hidden"
+              className="bg-amber-100/70 border border-amber-300 rounded-3xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition overflow-hidden"
             >
 
               <img
@@ -106,11 +106,11 @@ function Products() {
                   {product.name}
                 </h2>
 
-                <p className="text-amber-600 font-black text-lg">
+                <p className="text-black font-black text-lg">
                   KES {Number(product.price).toLocaleString()}
                 </p>
 
-                <p className="text-black/60 text-sm">
+                <p className="text-black text-sm">
                   Stock:{" "}
                   <span className="font-bold text-black">
                     {product.stock}
@@ -136,7 +136,7 @@ function Products() {
       {showModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
 
-          <div className="bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl border border-black/10">
+          <div className="bg-amber-100 w-full max-w-md rounded-3xl p-6 shadow-2xl border border-amber-300">
 
             <h2 className="text-2xl font-black text-black mb-5">
               Add Product
@@ -146,7 +146,7 @@ function Products() {
 
               <input
                 placeholder="Product Name"
-                className="w-full border border-black/10 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300"
+                className="w-full border border-amber-300 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-black text-black"
                 value={form.name}
                 onChange={(e) =>
                   setForm({ ...form, name: e.target.value })
@@ -155,7 +155,7 @@ function Products() {
 
               <input
                 placeholder="Price"
-                className="w-full border border-black/10 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300"
+                className="w-full border border-amber-300 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-black text-black"
                 value={form.price}
                 onChange={(e) =>
                   setForm({ ...form, price: e.target.value })
@@ -164,7 +164,7 @@ function Products() {
 
               <input
                 placeholder="Stock"
-                className="w-full border border-black/10 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300"
+                className="w-full border border-amber-300 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-black text-black"
                 value={form.stock}
                 onChange={(e) =>
                   setForm({ ...form, stock: e.target.value })
@@ -173,7 +173,7 @@ function Products() {
 
               <input
                 placeholder="Image URL"
-                className="w-full border border-black/10 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300"
+                className="w-full border border-amber-300 p-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-black text-black"
                 value={form.image}
                 onChange={(e) =>
                   setForm({ ...form, image: e.target.value })
@@ -186,14 +186,14 @@ function Products() {
 
               <button
                 onClick={handleCreate}
-                className="flex-1 bg-black text-amber-400 py-3 rounded-2xl font-black hover:scale-105 transition"
+                className="flex-1 bg-black text-amber-200 py-3 rounded-2xl font-black hover:scale-105 transition"
               >
                 Save Product
               </button>
 
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 bg-gray-200 text-black py-3 rounded-2xl font-bold hover:bg-gray-300 transition"
+                className="flex-1 bg-amber-200 text-black py-3 rounded-2xl font-bold hover:bg-amber-300 transition"
               >
                 Cancel
               </button>

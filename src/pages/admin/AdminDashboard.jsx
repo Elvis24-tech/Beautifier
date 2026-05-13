@@ -73,7 +73,8 @@ function AdminDashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-amber-50 via-yellow-50 to-stone-100">
+    <div className="min-h-screen bg-amber-200">
+
       <div className="flex flex-col lg:flex-row">
 
         <Sidebar />
@@ -86,14 +87,14 @@ function AdminDashboard() {
               Dashboard Overview
             </h1>
 
-            <p className="text-black/60 mt-2">
+            <p className="text-black mt-2">
               Luxury beauty store performance analytics
             </p>
           </div>
 
           {/* LOADING */}
           {loading ? (
-            <div className="bg-white/80 backdrop-blur-xl border border-black/10 rounded-2xl p-6 text-black/60">
+            <div className="bg-amber-100/70 border border-amber-300 rounded-2xl p-6 text-black">
               Loading dashboard...
             </div>
           ) : (
@@ -119,7 +120,7 @@ function AdminDashboard() {
               </div>
 
               {/* CHART */}
-              <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-5 sm:p-6 shadow-xl border border-black/10">
+              <div className="bg-amber-100/70 rounded-3xl p-5 sm:p-6 shadow-lg border border-amber-300">
 
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
 
@@ -127,43 +128,35 @@ function AdminDashboard() {
                     Sales Activity
                   </h2>
 
-                  <span className="text-black/60 text-sm">
+                  <span className="text-black text-sm">
                     Total Orders: {stats.orders}
                   </span>
 
                 </div>
 
-                <div className="overflow-x-auto">
+                <div style={{ width: "100%", height: "320px" }}>
 
-                  <div style={{ width: "100%", height: "320px" }}>
+                  <ResponsiveContainer width="100%" height="100%">
 
-                    <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={chartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
 
-                      <BarChart
-                        data={chartData}
-                        margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
-                      >
+                      <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
 
-                        <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+                      <XAxis dataKey="order" tick={{ fontSize: 12, fill: "#000" }} />
+                      <YAxis tick={{ fontSize: 12, fill: "#000" }} />
 
-                        <XAxis dataKey="order" tick={{ fontSize: 12 }} />
-                        <YAxis tick={{ fontSize: 12 }} />
+                      <Tooltip />
 
-                        <Tooltip />
+                      <Bar
+                        dataKey="sales"
+                        fill="#d97706"
+                        radius={[8, 8, 0, 0]}
+                        barSize={22}
+                      />
 
-                        {/* AMBER LUXURY BAR */}
-                        <Bar
-                          dataKey="sales"
-                          fill="#d97706"
-                          radius={[6, 6, 0, 0]}
-                          barSize={22}
-                        />
+                    </BarChart>
 
-                      </BarChart>
-
-                    </ResponsiveContainer>
-
-                  </div>
+                  </ResponsiveContainer>
 
                 </div>
 

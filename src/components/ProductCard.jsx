@@ -9,57 +9,52 @@ function ProductCard({ product }) {
     addToCart(product);
     setAdded(true);
 
-    setTimeout(() => {
-      setAdded(false);
-    }, 1500);
+    setTimeout(() => setAdded(false), 1200);
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-xl border border-black/10 rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
+    <div className="bg-amber-100 border border-amber-300 rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition overflow-hidden">
 
       {/* IMAGE */}
       <div className="relative overflow-hidden">
         <img
           src={product.image}
           alt={product.name}
-          className="h-56 w-full object-cover hover:scale-110 transition duration-500"
+          className="h-44 sm:h-52 md:h-56 w-full object-cover hover:scale-105 transition duration-500"
         />
-
-        {/* subtle dark overlay for luxury feel */}
-        <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition"></div>
       </div>
 
       {/* CONTENT */}
-      <div className="p-5">
+      <div className="p-4 sm:p-5">
 
         {/* NAME */}
-        <h2 className="font-black text-lg text-black uppercase tracking-wide">
+        <h2 className="font-black text-black text-base sm:text-lg uppercase">
           {product.name}
         </h2>
 
         {/* PRICE */}
-        <p className="text-amber-600 font-black text-xl mt-2 tracking-wide">
+        <p className="text-black font-black text-lg sm:text-xl mt-2">
           Ksh {product.price}
         </p>
 
         {/* ACTIONS */}
-        <div className="flex gap-3 mt-5">
+        <div className="flex gap-2 sm:gap-3 mt-4">
 
           {/* WISHLIST */}
           <button
             onClick={() => addToWishlist(product)}
-            className="px-4 py-2 bg-amber-100 border border-black/10 rounded-xl hover:bg-amber-200 transition font-bold text-black"
+            className="px-3 sm:px-4 py-2 bg-amber-200 border border-amber-300 rounded-xl font-bold text-black hover:bg-amber-300 transition"
           >
             ❤️
           </button>
 
-          {/* ADD TO CART */}
+          {/* CART */}
           <button
             onClick={handleAddToCart}
-            className={`flex-1 px-4 py-2 rounded-xl font-extrabold tracking-wide transition-all duration-300 ${
+            className={`flex-1 px-3 sm:px-4 py-2 rounded-xl font-black transition ${
               added
-                ? "bg-black text-amber-100 scale-105"
-                : "bg-black text-amber-100 hover:scale-105"
+                ? "bg-black text-amber-200"
+                : "bg-black text-amber-200 hover:scale-105"
             }`}
           >
             {added ? "ADDED ✓" : "ADD TO CART"}

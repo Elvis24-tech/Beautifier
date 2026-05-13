@@ -5,7 +5,7 @@ function OrderCard({ order }) {
   const itemCount = order.items?.length || 0;
 
   return (
-    <div className="bg-white/80 backdrop-blur-xl border border-black/10 rounded-3xl shadow-xl hover:shadow-2xl transition overflow-hidden">
+    <div className="bg-amber-100/70 border border-amber-300 rounded-3xl shadow-lg hover:shadow-xl transition overflow-hidden">
 
       <div className="p-5 sm:p-6">
 
@@ -17,26 +17,26 @@ function OrderCard({ order }) {
               Order #{order.id}
             </h2>
 
-            <p className="mt-2 text-xs sm:text-sm font-bold text-black bg-amber-100 px-3 py-1 rounded-full inline-block">
+            <p className="mt-2 text-xs sm:text-sm font-bold text-black bg-amber-200 px-3 py-1 rounded-full inline-block">
               {order.phone || "No phone provided"}
             </p>
           </div>
 
-          <p className="font-black text-amber-600 text-lg sm:text-right">
+          <p className="font-black text-black text-lg sm:text-right">
             Ksh {Number(order.total_price).toLocaleString()}
           </p>
 
         </div>
 
         {/* META */}
-        <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-xs text-black/60 border-t border-black/10 pt-3 mb-4">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-xs border-t border-amber-300 pt-3 mb-4">
 
           <span className="text-black font-semibold">
             {itemCount} item{itemCount !== 1 ? "s" : ""}
           </span>
 
           {order.created_at && (
-            <span>
+            <span className="text-black">
               {new Date(order.created_at).toLocaleDateString("en-KE", {
                 day: "2-digit",
                 month: "short",
@@ -54,25 +54,25 @@ function OrderCard({ order }) {
             order.items.map((item) => (
               <div
                 key={item.id}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-2xl px-4 py-3 text-sm border border-black/10 hover:bg-amber-50 transition"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-2xl px-4 py-3 text-sm border border-amber-300 hover:bg-amber-200/60 transition"
               >
 
                 <span className="font-bold text-black truncate">
                   {item.product_name || "Product"}
                 </span>
 
-                <span className="text-xs font-bold text-black bg-amber-200 px-2 py-1 rounded-full w-fit">
+                <span className="text-xs font-bold text-black bg-amber-300 px-2 py-1 rounded-full w-fit">
                   x{item.quantity}
                 </span>
 
-                <span className="font-black text-amber-600 sm:text-right whitespace-nowrap">
+                <span className="font-black text-black sm:text-right whitespace-nowrap">
                   Ksh {Number(item.price).toLocaleString()}
                 </span>
 
               </div>
             ))
           ) : (
-            <p className="text-sm text-black/40 text-center py-2">
+            <p className="text-sm text-black text-center py-2">
               No items found
             </p>
           )}
@@ -106,7 +106,7 @@ function Orders() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-linear-to-br from-amber-50 via-yellow-50 to-stone-100">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-amber-200">
 
       <Sidebar />
 
@@ -119,7 +119,7 @@ function Orders() {
             Orders
           </h1>
 
-          <p className="text-black/60 mt-2">
+          <p className="text-black mt-2">
             Track and manage customer purchases in real time
           </p>
 
@@ -128,18 +128,18 @@ function Orders() {
         {/* LOADING */}
         {loading ? (
           <div className="space-y-4">
-            <div className="h-20 bg-white/70 rounded-2xl animate-pulse" />
-            <div className="h-20 bg-white/70 rounded-2xl animate-pulse" />
-            <div className="h-20 bg-white/70 rounded-2xl animate-pulse" />
+            <div className="h-20 bg-amber-100 rounded-2xl animate-pulse" />
+            <div className="h-20 bg-amber-100 rounded-2xl animate-pulse" />
+            <div className="h-20 bg-amber-100 rounded-2xl animate-pulse" />
           </div>
         ) : orders.length === 0 ? (
-          <div className="bg-white/80 border border-black/10 rounded-3xl p-10 text-center shadow-xl">
+          <div className="bg-amber-100/70 border border-amber-300 rounded-3xl p-10 text-center shadow-lg">
 
             <h3 className="font-black text-black text-lg">
               No orders yet
             </h3>
 
-            <p className="text-black/50 mt-1">
+            <p className="text-black mt-1">
               Orders will appear here when customers make purchases
             </p>
 
