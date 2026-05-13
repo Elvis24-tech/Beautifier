@@ -11,6 +11,25 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import Products from "./pages/admin/Products";
 import Orders from "./pages/admin/Orders";
 
+import Login from "./pages/Login";
+
+/**
+ * 🔐 SIMPLE AUTH CHECK (JWT from backend)
+ */
+const isAuthenticated = () => {
+  return !!localStorage.getItem("access");
+};
+
+/**
+ * 🔒 PROTECTED ROUTE WRAPPER
+ */
+function ProtectedRoute({ children }) {
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+}
+
 function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center text-2xl font-bold">
@@ -22,9 +41,11 @@ function NotFound() {
 function App() {
   return (
     <BrowserRouter>
-
       <Routes>
         <Route path="/" element={<Navigate to="/buyer" />} />
+
+        {/* LOGIN */}
+        <Route path="/login" element={<Login />} />
 
         {/* BUYER */}
         <Route path="/buyer" element={<BuyerLanding />} />
@@ -33,17 +54,45 @@ function App() {
         <Route path="/buyer/wishlist" element={<Wishlist />} />
         <Route path="/buyer/checkout" element={<Checkout />} />
 
-        {/* ADMIN */}
-        <Route path="/admin" element={<AdminLanding />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/products" element={<Products />} />
-        <Route path="/admin/orders" element={<Orders />} />
+        {/* ADMIN (PROTECTED) */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminLanding />
+            </ProtectedRoute>
+          }
+        />
 
-        {/* 404 */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/products"
+          element={
+            <ProtectedRoute>
+              <Products />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/orders"
+          element={
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<NotFound />} />
-
       </Routes>
-
     </BrowserRouter>
   );
 }
