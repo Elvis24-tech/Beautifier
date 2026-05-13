@@ -1,6 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function BuyerLanding() {
+  const navigate = useNavigate();
+
+  const isLoggedIn = !!localStorage.getItem("access");
+
+  const handleStartShopping = () => {
+    if (!isLoggedIn) {
+      navigate("/login");
+      return;
+    }
+
+    navigate("/buyer/dashboard");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+
+    navigate("/buyer");
+    window.location.reload();
+  };
+
   return (
     <div className="min-h-screen bg-linear-to-br from-amber-50 via-amber-100 to-stone-100 relative overflow-hidden">
 
@@ -15,20 +36,47 @@ function BuyerLanding() {
           Beautifier
         </h1>
 
-        <div className="flex gap-3 md:gap-4">
+        <div className="flex gap-3 md:gap-4 flex-wrap justify-end">
+
+          {isLoggedIn ? (
+            <>
+              <button
+                onClick={handleStartShopping}
+                className="bg-black text-amber-100 px-5 md:px-7 py-2 md:py-3 rounded-full shadow-xl hover:scale-105 transition font-extrabold tracking-wide"
+              >
+                SHOP NOW
+              </button>
+
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 text-white px-5 md:px-7 py-2 md:py-3 rounded-full shadow-xl hover:scale-105 transition font-bold"
+              >
+                LOGOUT
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="bg-white/80 backdrop-blur-xl text-black px-5 md:px-7 py-2 md:py-3 rounded-full shadow-xl hover:scale-105 transition font-bold border border-black/10"
+              >
+                LOGIN
+              </Link>
+
+              <Link
+                to="/register"
+                className="bg-black text-amber-100 px-5 md:px-7 py-2 md:py-3 rounded-full shadow-xl hover:scale-105 transition font-extrabold tracking-wide"
+              >
+                REGISTER
+              </Link>
+            </>
+          )}
 
           <Link
-            to="/buyer/dashboard"
-            className="bg-black text-amber-100 px-5 md:px-7 py-2 md:py-3 rounded-full shadow-xl hover:scale-105 transition font-bold tracking-wide"
-          >
-            SHOP NOW
-          </Link>
-
-          <Link
-            to="/admin"
+            to="/seller"
             className="bg-amber-200 text-black px-5 md:px-7 py-2 md:py-3 rounded-full shadow-xl hover:scale-105 transition font-extrabold border border-black/30"
           >
-            ADMIN
+            SELLER
           </Link>
 
         </div>
@@ -58,13 +106,24 @@ function BuyerLanding() {
             This is not just beauty — it’s refined elegance.
           </p>
 
-          <div className="mt-10">
-            <Link
-              to="/buyer/dashboard"
+          <div className="mt-10 flex flex-wrap gap-4">
+
+            <button
+              onClick={handleStartShopping}
               className="inline-block bg-black text-amber-100 px-10 py-4 rounded-full shadow-2xl hover:scale-105 transition font-extrabold tracking-wide"
             >
               START SHOPPING
-            </Link>
+            </button>
+
+            {!isLoggedIn && (
+              <Link
+                to="/register"
+                className="inline-block bg-white/80 backdrop-blur-xl text-black px-10 py-4 rounded-full shadow-xl hover:scale-105 transition font-bold border border-black/10"
+              >
+                CREATE ACCOUNT
+              </Link>
+            )}
+
           </div>
 
         </div>

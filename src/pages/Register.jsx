@@ -1,14 +1,20 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default function Register() {
   const { register } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     email: "",
     username: "",
     password: "",
+    role: "buyer",
   });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -17,11 +23,26 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     try {
       await register(form);
-      alert("Account created");
+
+      setSuccess(true);
+
+      setTimeout(() => {
+        // redirect based on role
+        if (form.role === "seller") {
+          navigate("/admin");
+        } else {
+          navigate("/buyer");
+        }
+      }, 1200);
+
     } catch (err) {
-      alert("Registration failed");
+      alert(err.response?.data?.error || "Registration failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -36,27 +57,56 @@ export default function Register() {
         onSubmit={handleSubmit}
         className="relative z-10 w-[90%] max-w-md bg-white/70 backdrop-blur-xl border border-black/10 shadow-2xl rounded-3xl p-8"
       >
-        <h2 className="text-4xl font-black text-black text-center uppercase tracking-tight">
+
+        <h2 className="text-4xl font-black text-black text-center uppercase">
           Create Account
         </h2>
 
-        <p className="text-center text-black/60 mt-2 text-sm font-medium">
-          Join the Beautifier luxury experience
+        <p className="text-center text-black/60 mt-2 text-sm">
+          Join as Buyer or Seller
         </p>
 
-        <div className="mt-8 space-y-4">
+        {/* ROLE SWITCH */}
+        <div className="flex gap-3 mt-6">
+          <button
+            type="button"
+            onClick={() => setForm({ ...form, role: "buyer" })}
+            className={`flex-1 py-2 rounded-full font-bold transition ${
+              form.role === "buyer"
+                ? "bg-black text-amber-100"
+                : "bg-white border"
+            }`}
+          >
+            Buyer
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setForm({ ...form, role: "seller" })}
+            className={`flex-1 py-2 rounded-full font-bold transition ${
+              form.role === "seller"
+                ? "bg-black text-amber-100"
+                : "bg-white border"
+            }`}
+          >
+            Seller
+          </button>
+        </div>
+
+        {/* FIELDS */}
+        <div className="mt-6 space-y-4">
           <input
             name="email"
             onChange={handleChange}
             placeholder="Email"
-            className="w-full px-5 py-3 rounded-full border border-black/10 bg-white/80 focus:outline-none focus:ring-2 focus:ring-amber-300"
+            className="w-full px-5 py-3 rounded-full border bg-white/80"
           />
 
           <input
             name="username"
             onChange={handleChange}
             placeholder="Username"
-            className="w-full px-5 py-3 rounded-full border border-black/10 bg-white/80 focus:outline-none focus:ring-2 focus:ring-amber-300"
+            className="w-full px-5 py-3 rounded-full border bg-white/80"
           />
 
           <input
@@ -64,20 +114,28 @@ export default function Register() {
             type="password"
             onChange={handleChange}
             placeholder="Password"
-            className="w-full px-5 py-3 rounded-full border border-black/10 bg-white/80 focus:outline-none focus:ring-2 focus:ring-amber-300"
+            className="w-full px-5 py-3 rounded-full border bg-white/80"
           />
         </div>
 
+        {/* BUTTON */}
         <button
           type="submit"
-          className="mt-8 w-full bg-black text-amber-100 py-3 rounded-full font-bold tracking-wide shadow-xl hover:scale-105 transition"
+          disabled={loading || success}
+          className="mt-8 w-full bg-black text-amber-100 py-3 rounded-full font-bold flex items-center justify-center gap-2"
         >
-          REGISTER
+          {loading ? (
+            <>
+              <div className="w-5 h-5 border-2 border-amber-200 border-t-transparent rounded-full animate-spin"></div>
+              Creating account...
+            </>
+          ) : success ? (
+            "WELCOME"
+          ) : (
+            "REGISTER"
+          )}
         </button>
 
-        <p className="text-center text-xs text-black/50 mt-6">
-          Start your premium beauty journey today
-        </p>
       </form>
     </div>
   );
