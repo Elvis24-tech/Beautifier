@@ -45,7 +45,7 @@ function Sidebar() {
         <div className="p-6">
           <div className="flex items-center justify-between lg:block">
             <div>
-              <h1 className="text-2xl font-bold">BeautyShop</h1>
+              <h1 className="text-2xl font-bold">Beautifier</h1>
               <p className="text-white/60 text-xs mt-1">Admin Console</p>
             </div>
 

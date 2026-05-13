@@ -2,89 +2,105 @@ import { Link } from "react-router-dom";
 
 function BuyerLanding() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-pink-50 via-rose-50 to-purple-100 relative overflow-hidden">
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-pink-300/30 blur-[120px] rounded-full"></div>
-      <div className="absolute -bottom-30 -right-25 w-96 h-96 bg-purple-300/30 blur-[140px] rounded-full"></div>
+    <div className="min-h-screen bg-linear-to-br from-amber-50 via-amber-100 to-stone-100 relative overflow-hidden">
+
+      {/* Luxury ambient glow */}
+      <div className="absolute -top-40 -left-40 w-125 h-125 bg-amber-300/20 blur-[150px] rounded-full"></div>
+      <div className="absolute -bottom-40 -right-40 w-125 h-125 bg-black/10 blur-[170px] rounded-full"></div>
+
+      {/* NAV */}
       <nav className="flex justify-between items-center px-5 md:px-16 py-6 relative z-10">
 
-        <h1 className="text-2xl md:text-4xl font-black text-gray-800">
+        <h1 className="text-3xl md:text-5xl font-black text-black tracking-tight uppercase">
           Beautifier
         </h1>
+
         <div className="flex gap-3 md:gap-4">
+
           <Link
             to="/buyer/dashboard"
-            className="bg-white/70 backdrop-blur-xl px-4 md:px-6 py-2 md:py-3 rounded-full shadow hover:scale-105 transition"
+            className="bg-black text-amber-100 px-5 md:px-7 py-2 md:py-3 rounded-full shadow-xl hover:scale-105 transition font-bold tracking-wide"
           >
-            Shop
+            SHOP NOW
           </Link>
 
           <Link
             to="/admin"
-            className="bg-linear-to-r from-pink-400 to-purple-400 text-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow hover:scale-105 transition"
+            className="bg-amber-200 text-black px-5 md:px-7 py-2 md:py-3 rounded-full shadow-xl hover:scale-105 transition font-extrabold border border-black/30"
           >
-            Admin
+            ADMIN
           </Link>
 
         </div>
       </nav>
-      <section className="grid lg:grid-cols-2 gap-10 items-center px-5 md:px-16 py-10 md:py-16 relative z-10">
 
+      {/* HERO */}
+      <section className="grid lg:grid-cols-2 gap-12 items-center px-5 md:px-16 py-14 md:py-20 relative z-10">
+
+        {/* LEFT TEXT */}
         <div>
 
-          <p className="text-pink-500 tracking-[4px] uppercase text-xs md:text-sm font-semibold">
-            Luxury Beauty Store
+          <p className="text-black/70 font-bold tracking-[6px] uppercase text-xs md:text-sm">
+            PREMIUM BEAUTY HOUSE
           </p>
 
-          <h1 className="text-4xl md:text-6xl font-black text-gray-800 leading-tight mt-3">
-            Glow like
-            <span className="bg-linear-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
-              {" "}never before
+          <h1 className="text-5xl md:text-7xl font-black text-black leading-none mt-4 uppercase">
+            Glow
+            <br />
+            LIKE
+            <span className="block text-black drop-shadow-[3px_3px_0px_rgba(0,0,0,0.15)]">
+              GOLD
             </span>
           </h1>
 
-          <p className="text-gray-600 mt-5 text-sm md:text-lg max-w-xl">
-            Discover skincare, makeup, and fragrance products designed to enhance your natural beauty.
+          <p className="text-black/70 mt-6 text-sm md:text-lg max-w-xl font-medium leading-relaxed">
+            Luxury skincare, makeup, and fragrance curated for bold beauty expression.
+            This is not just beauty — it’s refined elegance.
           </p>
-          <div className="mt-8">
 
+          <div className="mt-10">
             <Link
               to="/buyer/dashboard"
-              className="inline-block bg-linear-to-r from-pink-400 to-purple-400 text-white px-8 py-3 rounded-full shadow-lg hover:scale-105 transition"
+              className="inline-block bg-black text-amber-100 px-10 py-4 rounded-full shadow-2xl hover:scale-105 transition font-extrabold tracking-wide"
             >
-              Start Shopping
+              START SHOPPING
             </Link>
           </div>
+
         </div>
-        <div className="grid grid-cols-2 gap-4">
+
+        {/* PRODUCT GRID */}
+        <div className="grid grid-cols-2 gap-5">
 
           {[
             {
               img: "https://images-cdn.ubuy.co.in/66627d4c7792361739098c99-turmeric-face-cream-vitamin-c-glow.jpg",
-              name: "Face Cream"
+              name: "FACE CREAM"
             },
             {
               img: "https://www.byrdie.com/thmb/oTPhNjadECyfMujiDnYakyDXe5o=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/byr-best-lip-glosses-tout-7e6142d81c274fb69cb55d4b398201a0.jpg",
-              name: "Lip Gloss"
+              name: "LIP GLOSS"
             },
             {
               img: "https://res.cloudinary.com/dioovnmjd/image/upload/v1719560079/products/top-10-best-perfumes-for-men-kenya.webp",
-              name: "Perfume"
+              name: "PERFUME"
             },
             {
               img: "https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/pby/pby00764/y/5.jpg",
-              name: "Serum"
+              name: "SERUM"
             }
           ].map((item, i) => (
             <div
               key={i}
-              className="bg-white/60 backdrop-blur-xl rounded-3xl overflow-hidden shadow-lg hover:scale-105 transition"
+              className="bg-white/80 backdrop-blur-xl text-black rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition border border-black/10"
             >
               <img
                 src={item.img}
-                className="h-40 w-full object-cover"
+                className="h-44 w-full object-cover"
                 alt={item.name}
               />
-              <p className="text-center py-3 text-gray-700 font-semibold text-sm">
+
+              <p className="text-center py-4 font-black tracking-widest text-sm uppercase">
                 {item.name}
               </p>
             </div>
@@ -93,7 +109,6 @@ function BuyerLanding() {
         </div>
 
       </section>
-
     </div>
   );
 }
