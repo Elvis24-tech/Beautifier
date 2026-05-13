@@ -5,24 +5,23 @@ function OrderCard({ order }) {
 
   return (
     <div className="bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden">
-
-      <div className="p-5 sm:p-6">
-        <div className="flex items-start justify-between mb-4">
-          <div>
-            <h2 className="font-bold text-gray-900 text-lg">
+      <div className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+          <div className="min-w-0">
+            <h2 className="font-bold text-gray-900 text-base sm:text-lg">
               Order #{order.id}
             </h2>
-
-            <p className="mt-1 text-sm font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-lg inline-block w-fit">
+            <p className="mt-2 text-xs sm:text-sm font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-lg inline-block w-fit wrap-break-word">
               {order.phone || "No phone provided"}
             </p>
           </div>
 
-          <p className="font-black text-gray-900 text-lg">
+          <p className="font-black text-gray-900 text-base sm:text-lg sm:text-right">
             Ksh {Number(order.total_price).toLocaleString()}
           </p>
         </div>
-        <div className="flex justify-between text-xs text-gray-400 border-t border-gray-50 pt-3 mb-4">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-xs text-gray-400 border-t border-gray-50 pt-3 mb-4">
+
           <span className="text-rose-500 font-semibold">
             {itemCount} item{itemCount !== 1 ? "s" : ""}
           </span>
@@ -42,19 +41,18 @@ function OrderCard({ order }) {
             order.items.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-between items-center rounded-xl px-4 py-3 text-sm border hover:shadow-sm transition"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl px-4 py-3 text-sm border hover:shadow-sm transition"
               >
-                <span className="font-semibold text-blue-600 truncate max-w-[50%]">
+                <span className="font-semibold text-blue-600 truncate">
                   {item.product_name || "Product"}
                 </span>
-
-                <span className="text-xs font-bold text-purple-600 bg-purple-50 px-2 py-1 rounded-full">
+                <span className="text-xs font-bold text-purple-600 bg-purple-50 px-2 py-1 rounded-full w-fit">
                   x{item.quantity}
                 </span>
-
-                <span className="font-bold text-rose-500 whitespace-nowrap">
+                <span className="font-bold text-rose-500 sm:text-right whitespace-nowrap">
                   Ksh {Number(item.price).toLocaleString()}
                 </span>
+
               </div>
             ))
           ) : (
@@ -89,11 +87,13 @@ function Orders() {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-stretch bg-[#f7f7fb]">
+    <div className="min-h-screen flex flex-col lg:flex-row items-stretch bg-[#f7f7fb]">
+
       <Sidebar />
-      <div className="flex-1 min-h-screen p-5 sm:p-8 md:p-10">
-        <div className="mb-8">
-          <h1 className="text-3xl font-black text-gray-900">
+
+      <div className="flex-1 min-h-screen p-4 sm:p-8 md:p-10">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-black text-gray-900">
             Orders
           </h1>
           <p className="text-gray-400 text-sm mt-1">
@@ -102,12 +102,12 @@ function Orders() {
         </div>
         {loading ? (
           <div className="space-y-4">
-            <div className="h-24 bg-gray-100 rounded-2xl animate-pulse" />
-            <div className="h-24 bg-gray-100 rounded-2xl animate-pulse" />
-            <div className="h-24 bg-gray-100 rounded-2xl animate-pulse" />
+            <div className="h-20 sm:h-24 bg-gray-100 rounded-2xl animate-pulse" />
+            <div className="h-20 sm:h-24 bg-gray-100 rounded-2xl animate-pulse" />
+            <div className="h-20 sm:h-24 bg-gray-100 rounded-2xl animate-pulse" />
           </div>
         ) : orders.length === 0 ? (
-          <div className="bg-white border border-gray-100 rounded-2xl p-12 text-center">
+          <div className="bg-white border border-gray-100 rounded-2xl p-8 sm:p-12 text-center">
             <h3 className="font-bold text-gray-800 text-lg">
               No orders yet
             </h3>
