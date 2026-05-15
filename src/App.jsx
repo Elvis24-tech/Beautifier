@@ -8,22 +8,13 @@ import AdminLanding from "./pages/admin/AdminLanding";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import Products from "./pages/admin/Products";
 import Orders from "./pages/admin/Orders";
-import AdminLogin from "./pages/AdminLogin";
+import AdminLogin from "./pages/AdminLogin"
 import AdminRoute from "./components/AdminRoute";
-function NotFound() {
-  return (
-    <div className="min-h-screen flex items-center justify-center text-3xl font-bold">
-      404 - Page Not Found
-    </div>
-  );
-}
-
 function App() {
   return (
     <BrowserRouter>
-
       <Routes>
-        <Route path="/" element={<Navigate to="/buyer" />} />
+        <Route path="/" element={<Navigate to="/buyer" replace />} />
         <Route path="/buyer" element={<BuyerLanding />} />
         <Route path="/buyer/dashboard" element={<BuyerDashboard />} />
         <Route path="/buyer/cart" element={<Cart />} />
@@ -65,7 +56,8 @@ function App() {
             </AdminRoute>
           }
         />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/buyer" replace />} />
+
       </Routes>
     </BrowserRouter>
   );
