@@ -81,7 +81,7 @@ function Orders() {
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/orders/");
+        const res = await fetch("https://beautifier-backend-iqvq.onrender.com/api/orders/");
         const data = await res.json();
         setOrders(Array.isArray(data) ? data : data.results || []);
       } catch (err) {

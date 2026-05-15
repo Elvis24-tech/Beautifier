@@ -35,7 +35,7 @@ function Checkout() {
       setLoading(true);
 
       const paymentResponse = await fetch(
-        "http://127.0.0.1:8000/api/mpesa/stkpush/",
+        "https://beautifier-backend-iqvq.onrender.com/api/mpesa/stkpush/",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -51,7 +51,7 @@ function Checkout() {
       }
 
       const orderResponse = await fetch(
-        "http://127.0.0.1:8000/api/orders/",
+        "https://beautifier-backend-iqvq.onrender.com/api/orders/",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

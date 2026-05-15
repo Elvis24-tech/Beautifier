@@ -28,8 +28,8 @@ function AdminDashboard() {
         setLoading(true);
 
         const [productsRes, ordersRes] = await Promise.all([
-          fetch("http://127.0.0.1:8000/api/products/"),
-          fetch("http://127.0.0.1:8000/api/orders/"),
+          fetch("https://beautifier-backend-iqvq.onrender.com/api/products/"),
+          fetch("https://beautifier-backend-iqvq.onrender.com/api/orders/"),
         ]);
 
         const productsData = await productsRes.json();
