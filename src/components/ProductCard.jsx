@@ -14,8 +14,6 @@ function ProductCard({ product }) {
 
   return (
     <div className="bg-amber-100 border border-amber-300 rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition overflow-hidden">
-
-      {/* IMAGE */}
       <div className="relative overflow-hidden">
         <img
           src={product.image}
@@ -23,32 +21,20 @@ function ProductCard({ product }) {
           className="h-44 sm:h-52 md:h-56 w-full object-cover hover:scale-105 transition duration-500"
         />
       </div>
-
-      {/* CONTENT */}
       <div className="p-4 sm:p-5">
-
-        {/* NAME */}
         <h2 className="font-black text-black text-base sm:text-lg uppercase">
           {product.name}
         </h2>
-
-        {/* PRICE */}
         <p className="text-black font-black text-lg sm:text-xl mt-2">
           Ksh {product.price}
         </p>
-
-        {/* ACTIONS */}
         <div className="flex gap-2 sm:gap-3 mt-4">
-
-          {/* WISHLIST */}
           <button
             onClick={() => addToWishlist(product)}
             className="px-3 sm:px-4 py-2 bg-amber-200 border border-amber-300 rounded-xl font-bold text-black hover:bg-amber-300 transition"
           >
             ❤️
           </button>
-
-          {/* CART */}
           <button
             onClick={handleAddToCart}
             className={`flex-1 px-3 sm:px-4 py-2 rounded-xl font-black transition ${

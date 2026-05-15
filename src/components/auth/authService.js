@@ -11,9 +11,6 @@ import {
 
 const provider = new GoogleAuthProvider();
 
-/**
- * GOOGLE LOGIN
- */
 export const loginWithGoogleAndBackend = async () => {
   const result = await signInWithPopup(auth, provider);
 

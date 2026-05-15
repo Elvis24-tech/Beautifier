@@ -3,8 +3,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ShopContext = createContext();
 
 export function ShopProvider({ children }) {
-
-  // LOAD FROM LOCALSTORAGE INITIALLY
   const [cart, setCart] = useState(() => {
     const saved = localStorage.getItem("cart");
     return saved ? JSON.parse(saved) : [];
@@ -15,17 +13,12 @@ export function ShopProvider({ children }) {
     return saved ? JSON.parse(saved) : [];
   });
 
-  // SAVE CART
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-
-  // SAVE WISHLIST
   useEffect(() => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
-
-  // ================= CART =================
   const addToCart = (product) => {
     setCart((prev) => {
       const existing = prev.find((item) => item.id === product.id);
@@ -72,7 +65,6 @@ export function ShopProvider({ children }) {
     setCart([]);
   };
 
-  // ================= WISHLIST =================
   const addToWishlist = (product) => {
     const exists = wishlist.find((item) => item.id === product.id);
     if (exists) return;
