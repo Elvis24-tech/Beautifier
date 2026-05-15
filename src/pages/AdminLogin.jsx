@@ -22,12 +22,9 @@ function AdminLogin() {
     setLoading(true);
     setError("");
 
-    // DEBUG: check what you're sending
-    console.log("LOGIN PAYLOAD:", formData);
-
     try {
       const res = await fetch(
-        "https://beautifier-backend-iqvq.onrender.com/api/auth/login/",
+        "https://beautifier-backend-iqvq.onrender.com/api/token/",
         {
           method: "POST",
           headers: {
@@ -42,23 +39,17 @@ function AdminLogin() {
 
       const data = await res.json();
       console.log("LOGIN RESPONSE:", data);
-
       if (!res.ok) {
-        setError(data.error || "Login failed");
+        setError(data.detail || "Invalid username or password");
         return;
       }
-
-      localStorage.setItem("token", data.access);
-      localStorage.setItem("user", JSON.stringify(data.user));
-
-      if (data.user.is_admin) {
-        window.location.href = "/admin";
-      } else {
-        setError("You are not authorized as admin");
-      }
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("refresh", data.refresh);
+      setFormData({ username: "", password: "" });
+      window.location.href = "/admin";
     } catch (err) {
       console.log(err);
-      setError("Something went wrong");
+      setError("Network error. Please try again.");
     } finally {
       setLoading(false);
     }

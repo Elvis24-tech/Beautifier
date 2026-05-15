@@ -22,14 +22,11 @@ function Checkout() {
   );
 
   const Spinner = () => (
-    <div className="w-5 h-5 border-2 border-amber-100 border-t-transparent rounded-full animate-spin"></div>
+    <div className="w-5 h-5 border-2 border-amber-200 border-t-transparent rounded-full animate-spin" />
   );
 
   const handlePay = async () => {
-    if (!phone) {
-      alert("Enter phone number");
-      return;
-    }
+    if (!phone) return alert("Enter phone number");
 
     try {
       setLoading(true);
@@ -74,9 +71,9 @@ function Checkout() {
         clearCart();
         setPhone("");
       } else {
-        alert(orderData.error || "Order creation failed");
+        alert(orderData.error || "Order failed");
       }
-    } catch (error) {
+    } catch (err) {
       alert("Server error");
     } finally {
       setLoading(false);
@@ -84,86 +81,83 @@ function Checkout() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-amber-50 via-yellow-50 to-stone-100 px-3 sm:px-6 lg:px-14 py-6 sm:py-10">
-      <div className="mb-8">
-        <h1 className="text-3xl sm:text-5xl font-black text-black uppercase">
+    <div className="min-h-screen bg-linear-to-br from-amber-200 via-amber-100 to-yellow-100 px-4 sm:px-8 lg:px-16 py-10 relative overflow-hidden">
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-amber-300/40 blur-[160px] rounded-full" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-400/30 blur-[180px] rounded-full" />
+      <div className="relative z-10 mb-10">
+        <h1 className="text-4xl sm:text-6xl font-black text-black uppercase">
           Checkout
         </h1>
-        <p className="text-black/60 mt-2">
-          Complete your luxury beauty order securely via M-Pesa
+        <p className="text-black/70 mt-2">
+          Complete your M-Pesa payment securely
         </p>
       </div>
       {cart.length === 0 ? (
-        <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-10 text-center shadow-xl border border-black/10">
-
-          <div className="text-5xl mb-4">🛒</div>
-
-          <h2 className="text-2xl font-black text-black">
+        <div className="relative z-10 bg-amber-100/70 border border-amber-300 rounded-3xl p-10 text-center shadow-xl">
+          <div className="text-6xl">🛒</div>
+          <h2 className="text-2xl font-black text-black mt-4">
             Your cart is empty
           </h2>
 
           <p className="text-black/60 mt-2">
-            Add premium products to continue
+            Add products to continue shopping
           </p>
 
           <Link
             to="/buyer/dashboard"
-            className="inline-block mt-6 bg-black text-amber-100 px-8 py-3 rounded-full font-bold hover:scale-105 transition"
+            className="inline-block mt-6 bg-black text-amber-200 px-10 py-3 rounded-full font-black hover:scale-105 transition"
           >
             START SHOPPING
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-          <div className="xl:col-span-2 space-y-5">
+        <div className="relative z-10 grid grid-cols-1 xl:grid-cols-3 gap-8">
+          <div className="xl:col-span-2 space-y-6">
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="bg-white/80 backdrop-blur-xl rounded-3xl p-5 shadow-xl border border-black/10 flex flex-col sm:flex-row gap-4"
+                className="bg-amber-100/80 border border-amber-300 rounded-3xl p-5 shadow-lg flex flex-col sm:flex-row gap-5"
               >
-
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full sm:w-28 h-40 sm:h-28 object-cover rounded-2xl"
+                  className="w-full sm:w-32 h-40 sm:h-32 object-cover rounded-2xl"
                 />
 
                 <div className="flex-1">
-
                   <div className="flex justify-between">
-
                     <div>
                       <h2 className="text-lg font-black text-black uppercase">
                         {item.name}
                       </h2>
-
-                      <p className="text-amber-600 font-black mt-1">
+                      <p className="text-amber-700 font-black">
                         Ksh {item.price}
                       </p>
                     </div>
 
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="text-black/40 hover:text-red-500 font-black text-xl"
+                      className="text-black/40 hover:text-red-500 text-xl font-black"
                     >
                       ✕
                     </button>
-
                   </div>
-                  <div className="flex items-center gap-3 mt-5">
+
+                  <div className="flex items-center gap-3 mt-4">
                     <button
                       onClick={() => decreaseQuantity(item.id)}
-                      className="w-10 h-10 rounded-full bg-black text-amber-100 font-bold"
+                      className="w-10 h-10 rounded-full bg-black text-amber-200 font-bold"
                     >
                       -
                     </button>
+
                     <span className="font-black text-black">
                       {item.quantity}
                     </span>
 
                     <button
                       onClick={() => increaseQuantity(item.id)}
-                      className="w-10 h-10 rounded-full bg-amber-200 text-black font-bold"
+                      className="w-10 h-10 rounded-full bg-amber-300 text-black font-bold"
                     >
                       +
                     </button>
@@ -171,23 +165,21 @@ function Checkout() {
                 </div>
               </div>
             ))}
-
           </div>
-          <div className="xl:sticky xl:top-6 h-fit">
-            <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-black/10">
+          <div className="xl:sticky xl:top-10 h-fit">
+            <div className="bg-amber-100/90 border border-amber-300 rounded-3xl p-6 shadow-xl">
               <h2 className="text-2xl font-black text-black uppercase mb-6">
                 Order Summary
               </h2>
 
               <div className="space-y-3 text-black/70">
-
                 <div className="flex justify-between">
                   <span>Items</span>
                   <span className="font-bold text-black">{cart.length}</span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span>Total Quantity</span>
+                  <span>Quantity</span>
                   <span className="font-bold text-black">
                     {cart.reduce((s, i) => s + i.quantity, 0)}
                   </span>
@@ -195,16 +187,13 @@ function Checkout() {
 
                 <div className="flex justify-between text-lg font-black">
                   <span>Total</span>
-                  <span className="text-amber-600">
-                    Ksh {total}
-                  </span>
+                  <span className="text-amber-700">Ksh {total}</span>
                 </div>
-
               </div>
 
               <button
                 onClick={() => setShowMpesa(true)}
-                className="w-full mt-8 bg-black text-amber-100 py-3 rounded-full font-black hover:scale-105 transition"
+                className="w-full mt-8 bg-black text-amber-200 py-3 rounded-full font-black hover:scale-105 transition"
               >
                 PLACE ORDER
               </button>
@@ -213,26 +202,24 @@ function Checkout() {
         </div>
       )}
       {showMpesa && (
-        <div className="fixed inset-0 bg-black/60 flex items-end sm:items-center justify-center z-50 px-3">
-
-          <div className="bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl border border-black/10">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+          <div className="bg-amber-50 border border-amber-300 w-full max-w-md rounded-3xl p-6 shadow-2xl">
 
             <h2 className="text-2xl font-black text-black mb-4">
               M-Pesa Payment
             </h2>
 
             <input
-              type="text"
-              placeholder="07XXXXXXXX"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full border border-black/10 p-4 rounded-2xl outline-none focus:border-amber-400"
+              placeholder="07XXXXXXXX"
+              className="w-full border border-amber-300 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-amber-400"
             />
 
             <button
               onClick={handlePay}
               disabled={loading}
-              className="w-full mt-5 bg-black text-amber-100 py-4 rounded-2xl font-black flex justify-center items-center gap-3"
+              className="w-full mt-5 bg-black text-amber-200 py-4 rounded-2xl font-black flex items-center justify-center gap-3"
             >
               {loading && <Spinner />}
               {loading ? "Processing..." : `Pay Ksh ${total}`}
@@ -244,15 +231,14 @@ function Checkout() {
             >
               Cancel
             </button>
-
           </div>
         </div>
       )}
       {success && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4">
-          <div className="bg-white rounded-3xl p-8 text-center shadow-2xl border border-black/10">
-            <div className="text-5xl mb-4">✔</div>
-            <h2 className="text-2xl font-black text-black">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+          <div className="bg-amber-100 border border-amber-300 rounded-3xl p-8 text-center shadow-2xl">
+            <div className="text-6xl">✔</div>
+            <h2 className="text-2xl font-black text-black mt-3">
               Payment Successful
             </h2>
 
@@ -262,15 +248,13 @@ function Checkout() {
 
             <button
               onClick={() => setSuccess(false)}
-              className="mt-6 bg-black text-amber-100 px-8 py-3 rounded-full font-black hover:scale-105 transition"
+              className="mt-6 bg-black text-amber-200 px-10 py-3 rounded-full font-black hover:scale-105 transition"
             >
               CONTINUE
             </button>
-
           </div>
         </div>
       )}
-
     </div>
   );
 }

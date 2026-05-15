@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const navItem = (path) =>
@@ -14,9 +15,11 @@ function Sidebar() {
     }`;
 
   function handleLogout() {
-    localStorage.removeItem("token");
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
     localStorage.removeItem("user");
-    window.location.href = "/admin-login";
+    setOpen(false);
+    navigate("/buyer");
   }
 
   return (
@@ -49,16 +52,12 @@ function Sidebar() {
         `}
       >
         <div className="p-6 border-b border-amber-300">
-          <h1 className="text-2xl font-black text-black">
-            Beautifier
-          </h1>
-          <p className="text-black text-xs">
-            Admin Console
-          </p>
+          <h1 className="text-2xl font-black text-black">Beautifier</h1>
+          <p className="text-black text-xs">Admin Console</p>
         </div>
         <div className="flex flex-col gap-2 p-3 flex-1">
           <Link to="/admin/dashboard" className={navItem("/admin/dashboard")}>
-           Dashboard
+            Dashboard
           </Link>
 
           <Link to="/admin/products" className={navItem("/admin/products")}>
@@ -73,7 +72,7 @@ function Sidebar() {
             to="/buyer"
             className="mt-auto px-4 py-3 text-black hover:bg-amber-300 rounded-xl transition font-semibold"
           >
-           Back to Store
+            Back to Store
           </Link>
 
           <button

@@ -25,21 +25,40 @@ function BuyerDashboard() {
     <div className="min-h-screen bg-amber-200 relative overflow-hidden">
       <div className="px-4 sm:px-6 md:px-12 pt-8 md:pt-10 relative z-10">
         <div className="flex justify-between items-center mb-10">
-          <Link to="/" className="bg-black text-amber-200 px-4 py-2 rounded-full">
+          <Link
+            to="/"
+            className="bg-black text-amber-200 px-4 py-2 rounded-full font-bold hover:scale-105 transition"
+          >
             ← HOME
           </Link>
+          <h1 className="text-3xl font-black uppercase tracking-wide">
+            BeautyShop
+          </h1>
+          <div className="flex gap-3 items-center">
+            <Link
+              to="/buyer/wishlist"
+              className="flex items-center gap-2 bg-pink-200 text-black px-5 py-2 rounded-full font-bold shadow-md hover:scale-105 transition"
+            >
+              Wishlist
+              <span className="bg-black text-pink-200 px-2 py-0.5 rounded-full text-xs font-black">
+                {wishlistCount}
+              </span>
+            </Link>
+            <Link
+              to="/buyer/cart"
+              className="flex items-center gap-2 bg-black text-amber-200 px-5 py-2 rounded-full font-bold shadow-md hover:scale-105 transition"
+            >
+              🛒 Cart
+              <span className="bg-amber-200 text-black px-2 py-0.5 rounded-full text-xs font-black">
+                {cartCount}
+              </span>
+            </Link>
 
-          <h1 className="text-3xl font-black">BeautyShop</h1>
-
-          <div className="flex gap-4">
-            <Link to="/buyer/wishlist">❤️ {wishlistCount}</Link>
-            <Link to="/buyer/cart">🛒 {cartCount}</Link>
           </div>
         </div>
 
         <h2 className="text-4xl font-black">Products</h2>
       </div>
-
       <div className="px-4 md:px-12 pb-16 relative z-10">
         {products.length === 0 ? (
           <p>No products available</p>
