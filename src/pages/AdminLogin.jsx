@@ -62,9 +62,8 @@ function AdminLogin() {
         </h1>
 
         <p className="text-black text-center text-sm mt-2">
-          Beautifier Control Panel
+          Beautifier Admin Console Access
         </p>
-
         {error && (
           <div className="bg-amber-300 text-black p-3 rounded-xl mt-5 text-sm font-semibold">
             {error}
@@ -76,6 +75,7 @@ function AdminLogin() {
           onChange={handleChange}
           className="w-full mt-6 px-4 py-3 rounded-xl bg-amber-50 border border-amber-300 text-black placeholder-black outline-none"
         />
+
         <input
           type="password"
           name="password"
@@ -89,6 +89,14 @@ function AdminLogin() {
         >
           {loading ? "Logging in..." : "LOGIN"}
         </button>
+        <div className="text-center mt-4">
+          <span
+            onClick={() => (window.location.href = "/")}
+            className="text-black underline cursor-pointer text-sm font-medium hover:opacity-70"
+          >
+            Back to Home
+          </span>
+        </div>
       </form>
     </div>
   );
