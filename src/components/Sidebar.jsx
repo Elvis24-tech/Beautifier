@@ -4,7 +4,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 function Sidebar() {
   const location = useLocation();
   const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
 
   const navItem = (path) =>
     `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition
@@ -15,11 +17,16 @@ function Sidebar() {
     }`;
 
   function handleLogout() {
+    setLoggingOut(true);
+
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
     localStorage.removeItem("user");
-    setOpen(false);
-    navigate("/buyer");
+
+    setTimeout(() => {
+      setOpen(false);
+      navigate("/buyer");
+    }, 2000);
   }
 
   return (
@@ -55,6 +62,7 @@ function Sidebar() {
           <h1 className="text-2xl font-black text-black">Beautifier</h1>
           <p className="text-black text-xs">Admin Console</p>
         </div>
+
         <div className="flex flex-col gap-2 p-3 flex-1">
           <Link to="/admin/dashboard" className={navItem("/admin/dashboard")}>
             Dashboard
@@ -74,15 +82,48 @@ function Sidebar() {
           >
             Back to Store
           </Link>
-
           <button
             onClick={handleLogout}
-            className="mt-2 px-4 py-3 bg-amber-300 hover:bg-amber-400 text-black rounded-xl font-bold transition"
+            className="mt-2 px-4 py-3 bg-amber-300 text-black rounded-xl font-black hover:bg-amber-400 hover:scale-105 transition"
           >
             Logout
           </button>
         </div>
       </div>
+      {loggingOut && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-amber-100 border border-amber-300 rounded-3xl p-10 text-center shadow-2xl relative overflow-hidden">
+            <div className="absolute -top-16 -left-16 w-52 h-52 bg-amber-300/50 blur-[120px] rounded-full"></div>
+            <div className="absolute -bottom-16 -right-16 w-52 h-52 bg-amber-400/40 blur-[140px] rounded-full"></div>
+            <div className="flex justify-center mb-6">
+              <div className="relative w-16 h-16">
+                <div className="absolute inset-0 border-4 border-amber-300 border-t-black rounded-full animate-spin"></div>
+                <div className="absolute inset-2 border-4 border-black border-b-amber-400 rounded-full animate-[spin_1.2s_linear_infinite_reverse]"></div>
+              </div>
+            </div>
+
+            <h2 className="text-2xl font-black text-black uppercase">
+              Logging Out
+            </h2>
+
+            <p className="text-black/60 mt-2 text-sm">
+              Redirecting to store...
+            </p>
+
+            <div className="mt-5 h-1 w-full bg-amber-200 rounded-full overflow-hidden">
+              <div className="h-full w-1/3 bg-black rounded-full animate-[loading_1.2s_ease-in-out_infinite]"></div>
+            </div>
+
+            <style>{`
+              @keyframes loading {
+                0% { transform: translateX(-100%); }
+                50% { transform: translateX(200%); }
+                100% { transform: translateX(-100%); }
+              }
+            `}</style>
+          </div>
+        </div>
+      )}
     </>
   );
 }

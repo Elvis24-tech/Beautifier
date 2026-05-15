@@ -23,10 +23,6 @@ export const loginWithGoogleAndBackend = async () => {
 
   return backendData;
 };
-
-/**
- * REGISTER WITH EMAIL/PASSWORD
- */
 export const registerUser = async ({
   name,
   email,
@@ -52,9 +48,6 @@ export const registerUser = async ({
   return backendData;
 };
 
-/**
- * LOGIN WITH EMAIL/PASSWORD
- */
 export const loginUser = async ({
   email,
   password,
@@ -74,10 +67,6 @@ export const loginUser = async ({
 
   return backendData;
 };
-
-/**
- * SEND FIREBASE TOKEN TO DJANGO
- */
 export const exchangeFirebaseToken = async (
   firebaseToken
 ) => {
@@ -103,9 +92,6 @@ export const exchangeFirebaseToken = async (
   return data;
 };
 
-/**
- * LOGOUT
- */
 export const logoutUser = async () => {
   await signOut(auth);
 

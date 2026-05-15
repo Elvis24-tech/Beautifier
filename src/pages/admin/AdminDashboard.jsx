@@ -74,14 +74,10 @@ function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-amber-200">
-
       <div className="flex flex-col lg:flex-row">
-
         <Sidebar />
 
         <div className="flex-1 w-full p-4 sm:p-6 md:p-8">
-
-          {/* HEADER */}
           <div className="mb-8">
             <h1 className="text-2xl sm:text-4xl font-black text-black uppercase tracking-tight">
               Dashboard Overview
@@ -92,42 +88,32 @@ function AdminDashboard() {
             </p>
           </div>
 
-          {/* LOADING */}
           {loading ? (
             <div className="bg-amber-100/70 border border-amber-300 rounded-2xl p-6 text-black">
               Loading dashboard...
             </div>
           ) : (
             <>
-              {/* STATS */}
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mb-8">
-
                 <DashboardCard
                   title="Total Sales"
                   value={`Ksh ${stats.sales.toLocaleString()}`}
                 />
-
                 <DashboardCard
                   title="Orders"
                   value={stats.orders}
                 />
-
                 <DashboardCard
                   title="Products"
                   value={stats.products}
                 />
 
               </div>
-
-              {/* CHART */}
               <div className="bg-amber-100/70 rounded-3xl p-5 sm:p-6 shadow-lg border border-amber-300">
-
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-
                   <h2 className="text-lg sm:text-xl font-black text-black uppercase">
                     Sales Activity
                   </h2>
-
                   <span className="text-black text-sm">
                     Total Orders: {stats.orders}
                   </span>

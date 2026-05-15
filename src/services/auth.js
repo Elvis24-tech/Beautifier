@@ -30,7 +30,5 @@ export const logoutUser = () => {
   localStorage.removeItem("access");
   localStorage.removeItem("refresh");
   localStorage.removeItem("user");
-
-  // ✅ force redirect to buyer landing
   window.location.href = "/buyer";
 };

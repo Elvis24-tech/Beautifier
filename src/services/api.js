@@ -4,7 +4,6 @@ const api = axios.create({
   baseURL: "https://beautifier-backend-iqvq.onrender.com/api/",
 });
 
-// attach JWT automatically
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
 
