@@ -19,20 +19,12 @@ function BuyerDashboard() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-amber-200 via-amber-100 to-amber-300 relative overflow-hidden">
-
-      {/* BACKGROUND GLOWS */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-amber-300/20 blur-[160px] rounded-full" />
       <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-black/5 blur-[180px] rounded-full" />
       <div className="absolute top-1/2 left-1/3 w-96 h-96 bg-amber-200/20 blur-[200px] rounded-full" />
-
-      {/* HEADER */}
       <div className="px-4 sm:px-6 md:px-12 pt-8 md:pt-10 relative z-10">
-
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
-
-          {/* LEFT */}
           <div className="flex items-center gap-3 sm:gap-4">
-
             <Link
               to="/"
               className="bg-black text-amber-200 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold hover:scale-105 transition"
@@ -45,10 +37,7 @@ function BuyerDashboard() {
             </h1>
 
           </div>
-
-          {/* RIGHT */}
           <div className="flex gap-3 sm:gap-4">
-
             <Link
               to="/buyer/wishlist"
               className="relative bg-amber-100 border border-black/10 px-3 sm:px-4 py-2 rounded-full font-bold text-black hover:scale-105 transition"
@@ -76,10 +65,7 @@ function BuyerDashboard() {
           </div>
 
         </div>
-
-        {/* HERO */}
         <div className="mb-10 text-center sm:text-left">
-
           <h2 className="text-3xl sm:text-5xl font-black text-black uppercase leading-tight">
             Glow with
             <span className="block text-black">
@@ -94,8 +80,6 @@ function BuyerDashboard() {
         </div>
 
       </div>
-
-      {/* PRODUCTS */}
       <div className="px-4 sm:px-6 md:px-12 pb-16 relative z-10">
 
         {products.length === 0 ? (

@@ -19,17 +19,13 @@ function Cart() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-amber-50 via-yellow-50 to-stone-100 px-4 md:px-10 py-10">
-
-      {/* HEADER */}
       <div className="mb-10 flex items-center justify-between gap-4">
-
         <button
           onClick={() => navigate(-1)}
           className="bg-black text-amber-100 px-4 md:px-5 py-2 rounded-full shadow-lg hover:scale-105 transition text-sm md:text-base font-bold"
         >
-          ← BACK
+          BACK
         </button>
-
         <div className="text-center flex-1">
           <h1 className="text-3xl md:text-5xl font-black text-black uppercase tracking-tight">
             Your Cart
@@ -38,11 +34,8 @@ function Cart() {
             Luxury beauty selections curated for you
           </p>
         </div>
-
         <div className="w-16 md:w-24" />
       </div>
-
-      {/* EMPTY STATE */}
       {cart.length === 0 ? (
         <div className="flex flex-col items-center justify-center text-center mt-24">
 
@@ -68,10 +61,7 @@ function Cart() {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-          {/* LEFT: CART ITEMS */}
           <div className="lg:col-span-2 space-y-5">
-
             {cart.map((item) => (
               <div
                 key={item.id}
@@ -137,15 +127,12 @@ function Cart() {
 
           </div>
           <div className="lg:col-span-1">
-
             <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-black/10 lg:sticky lg:top-20">
-
               <h2 className="text-2xl font-black text-black mb-6 uppercase">
                 Order Summary
               </h2>
 
               <div className="space-y-3 text-black/70">
-
                 <div className="flex justify-between">
                   <span>Items</span>
                   <span className="font-bold text-black">{cart.length}</span>
@@ -164,27 +151,21 @@ function Cart() {
                 </div>
 
               </div>
-
               <hr className="my-5 border-black/10" />
-
               <Link
                 to="/buyer/checkout"
                 className="block text-center bg-black text-amber-100 py-3 rounded-full font-black hover:scale-105 transition"
               >
                 CHECKOUT
               </Link>
-
               <button
                 onClick={clearCart}
                 className="w-full mt-4 bg-amber-200 text-black py-3 rounded-full font-black hover:bg-amber-300 transition"
               >
                 CLEAR CART
               </button>
-
             </div>
-
           </div>
-
         </div>
       )}
     </div>

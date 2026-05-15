@@ -59,14 +59,9 @@ function Products() {
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-amber-200">
-
       <Sidebar />
-
       <div className="flex-1 p-4 sm:p-6 md:p-10">
-
-        {/* HEADER */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
-
           <div>
             <h1 className="text-3xl sm:text-4xl font-black text-black uppercase">
               Products
@@ -84,10 +79,7 @@ function Products() {
           </button>
 
         </div>
-
-        {/* PRODUCTS GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
           {products.map((product) => (
             <div
               key={product.id}
@@ -132,12 +124,9 @@ function Products() {
         </div>
       </div>
 
-      {/* MODAL */}
       {showModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-
           <div className="bg-amber-100 w-full max-w-md rounded-3xl p-6 shadow-2xl border border-amber-300">
-
             <h2 className="text-2xl font-black text-black mb-5">
               Add Product
             </h2>
@@ -183,14 +172,12 @@ function Products() {
             </div>
 
             <div className="flex gap-3 mt-6">
-
               <button
                 onClick={handleCreate}
                 className="flex-1 bg-black text-amber-200 py-3 rounded-2xl font-black hover:scale-105 transition"
               >
                 Save Product
               </button>
-
               <button
                 onClick={() => setShowModal(false)}
                 className="flex-1 bg-amber-200 text-black py-3 rounded-2xl font-bold hover:bg-amber-300 transition"

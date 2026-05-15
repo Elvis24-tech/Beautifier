@@ -85,8 +85,6 @@ function Checkout() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-amber-50 via-yellow-50 to-stone-100 px-3 sm:px-6 lg:px-14 py-6 sm:py-10">
-
-      {/* HEADER */}
       <div className="mb-8">
         <h1 className="text-3xl sm:text-5xl font-black text-black uppercase">
           Checkout
@@ -95,8 +93,6 @@ function Checkout() {
           Complete your luxury beauty order securely via M-Pesa
         </p>
       </div>
-
-      {/* EMPTY */}
       {cart.length === 0 ? (
         <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-10 text-center shadow-xl border border-black/10">
 
@@ -119,10 +115,7 @@ function Checkout() {
         </div>
       ) : (
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-
-          {/* ITEMS */}
           <div className="xl:col-span-2 space-y-5">
-
             {cart.map((item) => (
               <div
                 key={item.id}
@@ -157,17 +150,13 @@ function Checkout() {
                     </button>
 
                   </div>
-
-                  {/* QUANTITY */}
                   <div className="flex items-center gap-3 mt-5">
-
                     <button
                       onClick={() => decreaseQuantity(item.id)}
                       className="w-10 h-10 rounded-full bg-black text-amber-100 font-bold"
                     >
                       -
                     </button>
-
                     <span className="font-black text-black">
                       {item.quantity}
                     </span>
@@ -178,20 +167,14 @@ function Checkout() {
                     >
                       +
                     </button>
-
                   </div>
-
                 </div>
               </div>
             ))}
 
           </div>
-
-          {/* SUMMARY */}
           <div className="xl:sticky xl:top-6 h-fit">
-
             <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-black/10">
-
               <h2 className="text-2xl font-black text-black uppercase mb-6">
                 Order Summary
               </h2>
@@ -225,15 +208,10 @@ function Checkout() {
               >
                 PLACE ORDER
               </button>
-
             </div>
-
           </div>
-
         </div>
       )}
-
-      {/* MPESA MODAL */}
       {showMpesa && (
         <div className="fixed inset-0 bg-black/60 flex items-end sm:items-center justify-center z-50 px-3">
 
@@ -270,15 +248,10 @@ function Checkout() {
           </div>
         </div>
       )}
-
-      {/* SUCCESS */}
       {success && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4">
-
           <div className="bg-white rounded-3xl p-8 text-center shadow-2xl border border-black/10">
-
             <div className="text-5xl mb-4">✔</div>
-
             <h2 className="text-2xl font-black text-black">
               Payment Successful
             </h2>

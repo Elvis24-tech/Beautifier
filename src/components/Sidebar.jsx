@@ -13,29 +13,33 @@ function Sidebar() {
         : "text-black hover:bg-amber-300/40"
     }`;
 
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/admin-login";
+  }
+
   return (
     <>
-      {/* MOBILE HEADER */}
       <div className="lg:hidden flex items-center justify-between bg-amber-200 p-4 border-b border-amber-300">
         <div>
           <h1 className="font-black text-black">Beautifier</h1>
           <p className="text-black text-xs">Admin</p>
         </div>
 
-        <button className="text-black text-2xl" onClick={() => setOpen(!open)}>
+        <button
+          className="text-black text-2xl"
+          onClick={() => setOpen(!open)}
+        >
           ☰
         </button>
       </div>
-
-      {/* OVERLAY */}
       {open && (
         <div
           className="fixed inset-0 bg-black/30 z-40 lg:hidden"
           onClick={() => setOpen(false)}
         />
       )}
-
-      {/* SIDEBAR */}
       <div
         className={`
           fixed lg:static top-0 left-0 z-50 h-screen w-64
@@ -45,26 +49,39 @@ function Sidebar() {
         `}
       >
         <div className="p-6 border-b border-amber-300">
-          <h1 className="text-2xl font-black text-black">Beautifier</h1>
-          <p className="text-black text-xs">Admin Console</p>
+          <h1 className="text-2xl font-black text-black">
+            Beautifier
+          </h1>
+          <p className="text-black text-xs">
+            Admin Console
+          </p>
         </div>
-
         <div className="flex flex-col gap-2 p-3 flex-1">
           <Link to="/admin/dashboard" className={navItem("/admin/dashboard")}>
-            📊 Dashboard
+           Dashboard
           </Link>
 
           <Link to="/admin/products" className={navItem("/admin/products")}>
-            🛍 Products
+            Products
           </Link>
 
           <Link to="/admin/orders" className={navItem("/admin/orders")}>
-            📦 Orders
+            Orders
           </Link>
 
-          <Link to="/buyer" className="mt-auto px-4 py-3 text-black hover:bg-amber-300 rounded-xl">
-            ⬅ Back to Store
+          <Link
+            to="/buyer"
+            className="mt-auto px-4 py-3 text-black hover:bg-amber-300 rounded-xl transition font-semibold"
+          >
+           Back to Store
           </Link>
+
+          <button
+            onClick={handleLogout}
+            className="mt-2 px-4 py-3 bg-amber-300 hover:bg-amber-400 text-black rounded-xl font-bold transition"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </>
