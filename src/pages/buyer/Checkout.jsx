@@ -81,9 +81,13 @@ function Checkout() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-amber-200 via-amber-100 to-yellow-100 px-4 sm:px-8 lg:px-16 py-10 relative overflow-hidden">
+    <div className="min-h-screen bg-amber-200 relative overflow-hidden px-4 sm:px-8 lg:px-16 py-10">
+
+      {/* background glow */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-amber-300/40 blur-[160px] rounded-full" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-400/30 blur-[180px] rounded-full" />
+
+      {/* header */}
       <div className="relative z-10 mb-10">
         <h1 className="text-4xl sm:text-6xl font-black text-black uppercase">
           Checkout
@@ -92,13 +96,14 @@ function Checkout() {
           Complete your M-Pesa payment securely
         </p>
       </div>
+
+      {/* empty cart */}
       {cart.length === 0 ? (
-        <div className="relative z-10 bg-amber-100/70 border border-amber-300 rounded-3xl p-10 text-center shadow-xl">
+        <div className="relative z-10 bg-amber-100/80 border border-amber-300 rounded-3xl p-10 text-center shadow-xl">
           <div className="text-6xl">🛒</div>
           <h2 className="text-2xl font-black text-black mt-4">
             Your cart is empty
           </h2>
-
           <p className="text-black/60 mt-2">
             Add products to continue shopping
           </p>
@@ -112,6 +117,8 @@ function Checkout() {
         </div>
       ) : (
         <div className="relative z-10 grid grid-cols-1 xl:grid-cols-3 gap-8">
+
+          {/* CART ITEMS */}
           <div className="xl:col-span-2 space-y-6">
             {cart.map((item) => (
               <div
@@ -166,6 +173,8 @@ function Checkout() {
               </div>
             ))}
           </div>
+
+          {/* SUMMARY */}
           <div className="xl:sticky xl:top-10 h-fit">
             <div className="bg-amber-100/90 border border-amber-300 rounded-3xl p-6 shadow-xl">
               <h2 className="text-2xl font-black text-black uppercase mb-6">
@@ -201,6 +210,8 @@ function Checkout() {
           </div>
         </div>
       )}
+
+      {/* MPESA MODAL */}
       {showMpesa && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
           <div className="bg-amber-50 border border-amber-300 w-full max-w-md rounded-3xl p-6 shadow-2xl">
@@ -234,10 +245,14 @@ function Checkout() {
           </div>
         </div>
       )}
+
+      {/* SUCCESS MODAL */}
       {success && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
           <div className="bg-amber-100 border border-amber-300 rounded-3xl p-8 text-center shadow-2xl">
+
             <div className="text-6xl">✔</div>
+
             <h2 className="text-2xl font-black text-black mt-3">
               Payment Successful
             </h2>
@@ -252,6 +267,7 @@ function Checkout() {
             >
               CONTINUE
             </button>
+
           </div>
         </div>
       )}
