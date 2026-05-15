@@ -49,53 +49,46 @@ function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-amber-200 via-amber-100 to-amber-300 flex items-center justify-center relative overflow-hidden">
-
-      {/* GLOW BACKGROUNDS (SAME AS LANDING) */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-amber-400/20 blur-[140px] rounded-full"></div>
-      <div className="absolute top-40 -right-40 w-96 h-96 bg-amber-500/10 blur-[160px] rounded-full"></div>
-      <div className="absolute -bottom-40 left-1/3 w-96 h-96 bg-amber-300/20 blur-[150px] rounded-full"></div>
-
-      {/* FORM */}
-      <form className="relative z-10 w-full max-w-md bg-white/60 backdrop-blur-xl border border-amber-300 rounded-3xl p-8 shadow-2xl">
-
+    <div className="min-h-screen bg-amber-200 flex items-center justify-center relative overflow-hidden">
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-amber-300/60 rounded-full blur-[120px]"></div>
+      <div className="absolute top-40 -right-40 w-96 h-96 bg-amber-400/40 rounded-full blur-[120px]"></div>
+      <div className="absolute -bottom-40 left-1/3 w-96 h-96 bg-amber-500/40 rounded-full blur-[120px]"></div>
+      <form
+        onSubmit={handleLogin}
+        className="relative z-10 w-full max-w-md bg-amber-100 border border-amber-300 rounded-3xl p-8 shadow-xl"
+      >
         <h1 className="text-3xl font-black text-black text-center uppercase">
           Admin Login
         </h1>
 
-        <p className="text-black/70 text-center text-sm mt-2">
+        <p className="text-black text-center text-sm mt-2">
           Beautifier Control Panel
         </p>
 
         {error && (
-          <div className="bg-red-100 text-red-600 p-3 rounded-xl mt-5 text-sm">
+          <div className="bg-amber-300 text-black p-3 rounded-xl mt-5 text-sm font-semibold">
             {error}
           </div>
         )}
-
         <input
           name="username"
           placeholder="Username"
           onChange={handleChange}
-          className="w-full mt-6 px-4 py-3 rounded-xl border border-amber-300 bg-white/70 focus:border-black outline-none"
+          className="w-full mt-6 px-4 py-3 rounded-xl bg-amber-50 border border-amber-300 text-black placeholder-black outline-none"
         />
-
         <input
           type="password"
           name="password"
           placeholder="Password"
           onChange={handleChange}
-          className="w-full mt-4 px-4 py-3 rounded-xl border border-amber-300 bg-white/70 focus:border-black outline-none"
+          className="w-full mt-4 px-4 py-3 rounded-xl bg-amber-50 border border-amber-300 text-black placeholder-black outline-none"
         />
-
         <button
-          onClick={handleLogin}
           disabled={loading}
-          className="w-full mt-6 bg-black text-amber-200 py-3 rounded-xl font-bold hover:scale-105 transition"
+          className="w-full mt-6 bg-amber-300 hover:bg-amber-400 text-black py-3 rounded-xl font-black transition"
         >
           {loading ? "Logging in..." : "LOGIN"}
         </button>
-
       </form>
     </div>
   );
