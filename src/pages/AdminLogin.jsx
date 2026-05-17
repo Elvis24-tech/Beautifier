@@ -39,7 +39,6 @@ function AdminLogin() {
       );
 
       const data = await res.json();
-      console.log("LOGIN RESPONSE:", data);
 
       if (!res.ok) {
         setError(data.detail || "Invalid username or password");
@@ -51,10 +50,10 @@ function AdminLogin() {
 
       setSuccess(true);
       setFormData({ username: "", password: "" });
+
       setTimeout(() => {
         window.location.href = "/admin";
       }, 2500);
-
     } catch (err) {
       console.log(err);
       setError("Network error. Please try again.");
@@ -64,13 +63,13 @@ function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-amber-200 flex items-center justify-center relative overflow-hidden">
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-amber-300/60 blur-[140px] rounded-full"></div>
-      <div className="absolute top-40 -right-40 w-96 h-96 bg-amber-400/40 blur-[160px] rounded-full"></div>
-      <div className="absolute -bottom-40 left-1/3 w-96 h-96 bg-amber-500/30 blur-[180px] rounded-full"></div>
+    <div className="min-h-screen bg-amber-200 flex items-center justify-center relative overflow-hidden px-4 sm:px-6 py-8">
+      <div className="absolute -top-32 -left-32 w-72 h-72 sm:w-96 sm:h-96 bg-amber-300/60 blur-[140px] rounded-full"></div>
+      <div className="absolute top-32 -right-32 w-72 h-72 sm:w-96 sm:h-96 bg-amber-400/40 blur-[160px] rounded-full"></div>
+      <div className="absolute -bottom-32 left-1/3 w-72 h-72 sm:w-96 sm:h-96 bg-amber-500/30 blur-[180px] rounded-full"></div>
       <form
         onSubmit={handleLogin}
-        className="relative z-10 w-full max-w-md bg-amber-100 border border-amber-300 rounded-3xl p-8 shadow-2xl"
+        className="relative z-10 w-full max-w-md bg-amber-100 border border-amber-300 rounded-3xl p-6 sm:p-8 shadow-2xl"
       >
         <h1 className="text-3xl font-black text-black text-center uppercase">
           Admin Login
@@ -79,13 +78,11 @@ function AdminLogin() {
         <p className="text-black/60 text-center text-sm mt-2">
           Beautifier Admin Console
         </p>
-
         {error && (
-          <div className="bg-amber-300 text-black p-3 rounded-xl mt-5 text-sm font-semibold">
+          <div className="bg-amber-300 text-black p-3 rounded-xl mt-5 text-sm font-semibold wrap-break-word">
             {error}
           </div>
         )}
-
         <input
           name="username"
           placeholder="Username"
@@ -102,14 +99,12 @@ function AdminLogin() {
           onChange={handleChange}
           className="w-full mt-4 px-4 py-3 rounded-xl bg-amber-50 border border-amber-300 text-black outline-none"
         />
-
         <button
           disabled={loading}
-          className="w-full mt-6 bg-black text-amber-200 py-3 rounded-xl font-black hover:scale-105 transition"
+          className="w-full mt-6 bg-black text-amber-200 py-3 rounded-xl font-black hover:scale-105 transition disabled:opacity-60"
         >
           {loading ? "Logging in..." : "LOGIN"}
         </button>
-
         <div className="text-center mt-4">
           <span
             onClick={() => (window.location.href = "/")}
@@ -121,40 +116,27 @@ function AdminLogin() {
       </form>
       {success && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-          <div className="relative w-full max-w-md bg-amber-100 border border-amber-300 rounded-3xl p-10 text-center shadow-2xl overflow-hidden">
+          <div className="relative w-full max-w-md bg-amber-100 border border-amber-300 rounded-3xl p-8 text-center shadow-2xl overflow-hidden">
             <div className="absolute -top-20 -left-20 w-60 h-60 bg-amber-300/50 blur-[120px] rounded-full"></div>
             <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-amber-400/40 blur-[140px] rounded-full"></div>
-            <div className="flex justify-center mb-6">
-              <div className="relative w-16 h-16">
-                <div className="absolute inset-0 border-4 border-amber-300 border-t-black rounded-full animate-spin"></div>
-                <div className="absolute inset-2 border-4 border-black border-b-amber-400 rounded-full animate-[spin_1.2s_linear_infinite_reverse]"></div>
+            <div className="relative z-10">
+              <div className="w-16 h-16 mx-auto mb-6 border-4 border-amber-300 border-t-black rounded-full animate-spin"></div>
+              <h2 className="text-3xl font-black text-black uppercase">
+                Welcome Back
+              </h2>
 
+              <p className="text-black/60 mt-2 text-sm">
+                Redirecting to admin dashboard...
+              </p>
+
+              <div className="mt-6 h-1 w-full bg-amber-200 rounded-full overflow-hidden">
+                <div className="h-full w-1/3 bg-black rounded-full animate-pulse"></div>
               </div>
+
+              <p className="text-xs text-black/40 mt-4">
+                Preparing your workspace...
+              </p>
             </div>
-
-            <h2 className="text-3xl font-black text-black uppercase">
-              Welcome Back
-            </h2>
-
-            <p className="text-black/60 mt-2 text-sm">
-              Redirecting to admin dashboard...
-            </p>
-            <div className="mt-6 h-1 w-full bg-amber-200 rounded-full overflow-hidden">
-              <div className="h-full w-1/3 bg-black rounded-full animate-[loading_1.4s_ease-in-out_infinite]"></div>
-            </div>
-
-            <p className="text-xs text-black/40 mt-4">
-              Preparing your workspace...
-            </p>
-
-            <style>{`
-              @keyframes loading {
-                0% { transform: translateX(-100%); }
-                50% { transform: translateX(200%); }
-                100% { transform: translateX(-100%); }
-              }
-            `}</style>
-
           </div>
         </div>
       )}

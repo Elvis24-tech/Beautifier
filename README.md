@@ -4,8 +4,8 @@ Beautifier is a modern beauty e-commerce web application built with React, Tailw
 The platform allows users to browse beauty products, manage carts and wishlists, and make purchases through an elegant responsive interface.
 
 ---
-
-# Backend link - https://beautifier-backend-iqvq.onrender.com/api/docs/
+# Backend Github link - https://github.com/Elvis24-tech/Beautifier-backend
+# Backend live link - https://beautifier-backend-iqvq.onrender.com/api/docs/
 
 # Features
 
@@ -90,7 +90,7 @@ cd beautifier
 
 ---
 
-# ⚛ Frontend Setup
+# Frontend Setup
 
 ## Install Dependencies
 
@@ -112,7 +112,7 @@ http://localhost:5173
 
 ---
 
-# 🐍 Backend Setup
+# Backend Setup
 
 ## Create Virtual Environment
 
