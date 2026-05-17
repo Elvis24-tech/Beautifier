@@ -36,7 +36,7 @@ function BuyerDashboard() {
             </Link>
           </div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-wide text-center">
-            BeautyShop
+            Beautifier
           </h1>
           <div className="flex flex-col sm:flex-row gap-3 items-center w-full lg:w-auto">
             <Link
