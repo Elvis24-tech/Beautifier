@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AdminLogin() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -28,9 +31,7 @@ function AdminLogin() {
         "https://beautifier-backend-iqvq.onrender.com/api/token/",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             username: formData.username.trim(),
             password: formData.password,
@@ -78,11 +79,13 @@ function AdminLogin() {
         <p className="text-black/60 text-center text-sm mt-2">
           Beautifier Admin Console
         </p>
+
         {error && (
           <div className="bg-amber-300 text-black p-3 rounded-xl mt-5 text-sm font-semibold wrap-break-word">
             {error}
           </div>
         )}
+
         <input
           name="username"
           placeholder="Username"
@@ -99,19 +102,34 @@ function AdminLogin() {
           onChange={handleChange}
           className="w-full mt-4 px-4 py-3 rounded-xl bg-amber-50 border border-amber-300 text-black outline-none"
         />
+
         <button
           disabled={loading}
           className="w-full mt-6 bg-black text-amber-200 py-3 rounded-xl font-black hover:scale-105 transition disabled:opacity-60"
         >
           {loading ? "Logging in..." : "LOGIN"}
         </button>
-        <div className="text-center mt-4">
-          <span
-            onClick={() => (window.location.href = "/")}
-            className="text-black underline cursor-pointer text-sm"
+        <div className="text-center mt-4 space-y-2">
+          <p className="text-black/70 text-sm">
+            Don’t have an account?
+          </p>
+
+          <button
+            type="button"
+            onClick={() => navigate("/register")}
+            className="text-black underline font-semibold text-sm hover:text-amber-900"
           >
-            Back to Home
-          </span>
+            Create new account
+          </button>
+
+          <div>
+            <span
+              onClick={() => navigate("/")}
+              className="text-black underline cursor-pointer text-sm"
+            >
+              Back to Home
+            </span>
+          </div>
         </div>
       </form>
       {success && (
@@ -119,22 +137,16 @@ function AdminLogin() {
           <div className="relative w-full max-w-md bg-amber-100 border border-amber-300 rounded-3xl p-8 text-center shadow-2xl overflow-hidden">
             <div className="absolute -top-20 -left-20 w-60 h-60 bg-amber-300/50 blur-[120px] rounded-full"></div>
             <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-amber-400/40 blur-[140px] rounded-full"></div>
+
             <div className="relative z-10">
               <div className="w-16 h-16 mx-auto mb-6 border-4 border-amber-300 border-t-black rounded-full animate-spin"></div>
+
               <h2 className="text-3xl font-black text-black uppercase">
                 Welcome Back
               </h2>
 
               <p className="text-black/60 mt-2 text-sm">
                 Redirecting to admin dashboard...
-              </p>
-
-              <div className="mt-6 h-1 w-full bg-amber-200 rounded-full overflow-hidden">
-                <div className="h-full w-1/3 bg-black rounded-full animate-pulse"></div>
-              </div>
-
-              <p className="text-xs text-black/40 mt-4">
-                Preparing your workspace...
               </p>
             </div>
           </div>
